@@ -3,685 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boceto · Plantas de Urabá</title>
+<title>Plantas de Urabá · Vivero del trópico húmedo</title>
+<meta name="description" content="Vivero de Plantas de Urabá: banano, plátano, cacao, palmas, maderables y flora nativa de Urabá, Antioquia - Colombia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@400;600;700&family=Gochi+Hand&family=Patrick+Hand&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
-<style>
-  :root{
-    --ink:#2b2b2b;
-    --ink-soft:#5c5c5c;
-    --green:#3f7d2f;
-    --blue:#2f6db3;
-    --cream:#fffdf5;
-    --tan:#f3ead9;
-    --red:#c0392b;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    background:
-      radial-gradient(circle at 30px 40px, rgba(120,90,40,.05) 2px, transparent 2.6px),
-      radial-gradient(circle at 160px 130px, rgba(120,90,40,.05) 2px, transparent 2.6px),
-      radial-gradient(circle at 70px 220px, rgba(120,90,40,.05) 2px, transparent 2.6px),
-      radial-gradient(circle at 900px 300px, rgba(120,90,40,.05) 2px, transparent 2.6px),
-      var(--cream);
-    color:var(--ink);
-    font-family:'Patrick Hand', cursive;
-    font-size:18px;
-    -webkit-font-smoothing:antialiased;
-    padding:26px 14px 60px;
-  }
-  .page{
-    max-width:1160px;
-    margin:0 auto;
-    position:relative;
-  }
-  /* ---- sketch boxes drawn by JS ---- */
-  .sketch{position:relative}
-  .sketch > svg.boxlines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-  .sketch > *:not(svg.boxlines){position:relative;z-index:1}
-
-  /* ---- header ---- */
-  header.sketch{margin-bottom:34px;padding:22px 30px 18px}
-  .head-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
-  .brand{display:flex;align-items:center;gap:14px}
-  .brand svg{width:52px;height:52px;flex:none}
-  .brand-name{font-family:'Caveat',cursive;font-weight:700;font-size:40px;line-height:.95;letter-spacing:.5px}
-  .brand-region{font-family:'Gochi Hand',cursive;font-size:15px;color:var(--ink-soft);margin-top:2px}
-  .nav{display:flex;align-items:center;gap:26px}
-  .nav .link{position:relative;font-family:'Gochi Hand',cursive;font-size:20px;cursor:pointer;padding-bottom:4px;color:var(--ink);text-decoration:none}
-  .nav .link svg.squiggle{position:absolute;left:0;bottom:-6px;width:100%;height:8px}
-  .nav .dot{font-size:22px;color:#b9b0a0;line-height:1}
-
-  /* ---- hero ---- */
-  .hero.sketch{padding:36px 34px 30px;margin-bottom:40px}
-  .hero-inner{display:flex;gap:30px;align-items:center;flex-wrap:wrap}
-  .hero-copy{flex:1 1 420px}
-  .hero-pill{display:inline-block;padding:6px 14px 8px;font-family:'Gochi Hand',cursive;font-size:17px}
-  .hero h1{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(42px,5vw,62px);margin:14px 0 6px;line-height:1.02}
-  .hero .sub{font-size:20px;color:var(--ink-soft);margin:0 0 22px;max-width:46ch}
-  .cta-wrap{display:inline-block;position:relative}
-  .cta{display:inline-flex;align-items:center;gap:12px;padding:16px 30px 18px;font-family:'Caveat',cursive;font-weight:700;font-size:28px;cursor:pointer;background:rgba(196,224,130,.28)}
-  .cta .arrow{font-size:30px}
-  .cta:hover{transform:rotate(-1.2deg)}
-  .note-cta{position:absolute;top:-34px;left:6px;transform:rotate(-4deg);font-family:'Architects Daughter',cursive;font-size:15px;color:var(--red);white-space:nowrap}
-  .hero-art{flex:1 1 430px;min-width:320px}
-  .hero-art svg{width:100%;height:auto;display:block}
-
-  /* ---- sections titles ---- */
-  .sec-title{font-family:'Caveat',cursive;font-weight:700;font-size:44px;margin:0 0 4px}
-  .sec-note{font-family:'Architects Daughter',cursive;font-size:16px;color:var(--red);transform:rotate(-1.5deg);display:inline-block;margin:0 0 20px}
-
-  /* ---- grid ---- */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:10px}
-  .card.sketch{padding:26px 24px 22px}
-  .card-head{display:flex;align-items:center;gap:12px;margin-bottom:2px}
-  .card-head svg{width:40px;height:40px;flex:none}
-  .card h3{font-family:'Caveat',cursive;font-weight:700;font-size:30px;margin:0;line-height:1}
-  .card .squig{display:block;height:7px;margin:6px 0 8px}
-  .card .desc{font-size:16px;color:var(--ink-soft);margin:0 0 16px;line-height:1.35}
-  .plants{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
-  .plant{flex:1 1 110px;max-width:150px;text-align:center}
-  .plant svg{width:84px;height:84px;display:block;margin:0 auto}
-  .plant .pname{font-family:'Caveat',cursive;font-weight:600;font-size:21px;line-height:1.05;margin-top:6px}
-  .plant .psci{font-family:'Architects Daughter',cursive;font-size:11px;color:var(--ink-soft);line-height:1.15}
-
-  /* ---- footer ---- */
-  footer.sketch{margin-top:44px;padding:28px 30px 24px}
-  .foot-inner{display:flex;gap:36px;flex-wrap:wrap;justify-content:space-between}
-  .foot-col{flex:1 1 240px;min-width:200px}
-  .foot-col h4{font-family:'Caveat',cursive;font-weight:700;font-size:24px;margin:0 0 10px}
-  .foot-line{display:flex;align-items:center;gap:10px;font-size:17px;margin:8px 0}
-  .foot-line svg{width:24px;height:24px;flex:none}
-  .socials{display:flex;gap:16px;margin-top:10px}
-  .socials svg{width:44px;height:44px}
-  .foot-bottom{margin-top:22px;padding-top:14px;text-align:center;font-family:'Architects Daughter',cursive;font-size:15px;color:var(--ink-soft)}
-  .foot-bottom .dash{color:#c9bfa8}
-
-  .anno{font-family:'Architects Daughter',cursive;font-size:14px;color:var(--red)}
-  .paleta{position:absolute;right:6px;top:-14px;transform:rotate(1.6deg)}
-  .swatches{display:inline-flex;gap:6px;margin-left:8px;vertical-align:middle}
-  .swatch{width:15px;height:15px;border:1.5px solid var(--ink);display:inline-block;transform:rotate(-8deg)}
-  .sw-green{background:rgba(107,164,71,.55)}
-  .sw-blue{background:rgba(90,150,220,.55)}
-  .sw-red{background:rgba(192,57,43,.45)}
-
-  @media (max-width:860px){
-    .grid{grid-template-columns:1fr}
-    .head-inner{flex-direction:column;align-items:flex-start}
-  }
-</style>
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-<div class="page">
 
-  <!-- ================= ENCABEZADO ================= -->
-  <header class="sketch" id="header">
-    <div class="head-inner">
-      <div class="brand">
-        <svg id="brandIcon" viewBox="0 0 52 52"></svg>
-        <div>
-          <div class="brand-name">Plantas de Urabá</div>
-          <div class="brand-region">Vivero · Urabá, Antioquia — Colombia</div>
-        </div>
-      </div>
-      <nav class="nav">
-        <a class="link" href="#inicio">Inicio <svg class="squiggle"></svg></a>
-        <span class="dot">·</span>
-        <a class="link" href="#catalogo">Catálogo <svg class="squiggle"></svg></a>
-        <span class="dot">·</span>
-        <a class="link" href="#nosotros">Sobre Nosotros <svg class="squiggle"></svg></a>
-      </nav>
-    </div>
-  </header>
-
-  <div class="paleta anno">
-    paleta: carbón + verde + azul
-    <span class="swatches">
-      <span class="swatch sw-green"></span>
-      <span class="swatch sw-blue"></span>
-      <span class="swatch sw-red"></span>
-    </span>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="index.html" aria-label="Plantas de Urabá - Inicio">
+      <svg class="brand-logo" viewBox="0 0 48 48" fill="none" stroke="#2b2b2b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 38 C10 20 22 8 40 8 C40 26 28 38 10 38 Z"/>
+        <path d="M12 36 C20 28 27 21 36 12"/>
+        <path d="M23 23 C25 26 27 24 25 21"/>
+      </svg>
+      <span>
+        <span class="brand-name">Plantas de Urabá</span><br>
+        <span class="brand-region">Urabá · Antioquia, Colombia</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="nav-link active" href="index.html">Inicio</a>
+      <a class="nav-link" href="catalogo.html">Catálogo</a>
+      <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
+      <a class="nav-cta" href="catalogo.html">Ver Catálogo</a>
+    </nav>
   </div>
+</header>
 
-  <!-- ================= SECCIÓN PRINCIPAL / HERO ================= -->
-  <section class="hero sketch" id="inicio">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <span class="hero-pill sketch" id="heroPill">☞ Vivero del trópico húmedo</span>
-        <h1>Del trópico húmedo <br>a tu hogar.</h1>
-        <p class="sub">Semillas, plántulas y árboles de la región de Urabá, cuidados a mano por nuestra familia de viveristas.</p>
-        <div class="cta-wrap">
-          <span class="note-cta">↑ CTA principal</span>
-          <span class="cta sketch" id="ctaBtn"><span>Ver Catálogo Completo</span><span class="arrow">⟶</span></span>
-        </div>
-      </div>
-      <div class="hero-art">
-        <svg id="hero" viewBox="0 0 480 330"></svg>
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Apartad%C3%B3_bananeras.jpg" alt="Cultivo de banano en Apartadó, Urabá" loading="eager">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-pill">Vivero del trópico húmedo · Urabá</span>
+      <h1>Semillas y árboles que nacen en Urabá</h1>
+      <p class="sub">Somos un vivero familiar que cultiva especies agrícolas, palmas, maderables y flora nativa de la región, cuidadas a mano por viveristas de la zona.</p>
+      <div class="hero-cta">
+        <a class="btn" href="catalogo.html">Ver Catálogo Completo <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="sobre-nosotros.html">Conócenos</a>
       </div>
     </div>
   </section>
 
-  <!-- ================= GRULLA DE PRODUCTOS ================= -->
-  <h2 class="sec-title" id="catalogo">Catálogo de especies</h2>
-  <div class="sec-note">✏️ 4 categorías · 14 especies nativas y cultivadas</div>
-
-  <div class="grid">
-
-    <div class="card sketch">
-      <div class="card-head">
-        <svg class="catIcon" viewBox="0 0 40 40"></svg>
-        <h3>Agrícolas y Frutales</h3>
-      </div>
-      <svg class="squig" width="100%" height="7"></svg>
-      <p class="desc">Base de la economía y la tradición agrícola de la región.</p>
-      <div class="plants">
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="banano"></svg><div class="pname">Banano</div><div class="psci">Musa x acuminata</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="platanito"></svg><div class="pname">Plátano Hartón</div><div class="psci">Musa paradisiaca</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="maracuya"></svg><div class="pname">Maracuyá</div><div class="psci">Passiflora edulis</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="cacao"></svg><div class="pname">Cacao</div><div class="psci">Theobroma cacao</div></div>
-      </div>
+  <!-- CATEGORÍAS -->
+  <section class="sec" id="categorias">
+    <div class="sec-head">
+      <h2 class="sec-title">Lo que cultivamos</h2>
+      <span class="sec-note">4 categorías · especies con historia de la región</span>
     </div>
-
-    <div class="card sketch">
-      <div class="card-head">
-        <svg class="catIcon" viewBox="0 0 40 40"></svg>
-        <h3>Palmas</h3>
-      </div>
-      <svg class="squig" width="100%" height="7"></svg>
-      <p class="desc">Especies palmáceas de gran rentabilidad económica y arraigo cultural.</p>
-      <div class="plants">
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="palmaAceite"></svg><div class="pname">Palma de Aceite</div><div class="psci">Elaeis guineensis</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="coco"></svg><div class="pname">Coco Criollo</div><div class="psci">Cocos nucifera</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="chontaduro"></svg><div class="pname">Chontaduro</div><div class="psci">Bactris gasipaes</div></div>
-      </div>
+    <div class="sec-rule">
+      <svg viewBox="0 0 1200 10" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 5 Q 60 0 120 5 T 240 5 T 360 5 T 480 5 T 600 5 T 720 5 T 840 5 T 960 5 T 1080 5 T 1200 5" fill="none" stroke="#3f7d2f" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+      </svg>
     </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </section>
 
-    <div class="card sketch">
-      <div class="card-head">
-        <svg class="catIcon" viewBox="0 0 40 40"></svg>
-        <h3>Maderables y Forestales</h3>
-      </div>
-      <svg class="squig" width="100%" height="7"></svg>
-      <p class="desc">Árboles esenciales para reforestación, sombra y aprovechamiento maderero.</p>
-      <div class="plants">
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="melina"></svg><div class="pname">Melina</div><div class="psci">Gmelina arborea</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="roble"></svg><div class="pname">Roble</div><div class="psci">Tabebuia rosea</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="guamo"></svg><div class="pname">Guamo</div><div class="psci">Inga edulis</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="saman"></svg><div class="pname">Samán</div><div class="psci">Samanea saman</div></div>
-      </div>
+  <!-- ESPECIES DESTACADAS -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2 class="sec-title">Especies destacadas</h2>
+      <span class="sec-note">fotos reales · Wikimedia Commons</span>
     </div>
-
-    <div class="card sketch">
-      <div class="card-head">
-        <svg class="catIcon" viewBox="0 0 40 40"></svg>
-        <h3>Nativas y Tradicionales</h3>
-      </div>
-      <svg class="squig" width="100%" height="7"></svg>
-      <p class="desc">Flora propia del trópico húmedo con usos botánicos, culturales y medicinales.</p>
-      <div class="plants">
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="borujo"></svg><div class="pname">Borojó</div><div class="psci">Borojoa patinoi</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="achiote"></svg><div class="pname">Achiote</div><div class="psci">Bixa orellana</div></div>
-        <div class="plant"><svg class="plant-icon" viewBox="0 0 90 90" data-plant="bijao"></svg><div class="pname">Bijao</div><div class="psci">Calathea lutea</div></div>
-      </div>
+    <div class="sec-rule">
+      <svg viewBox="0 0 1200 10" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 5 Q 60 0 120 5 T 240 5 T 360 5 T 480 5 T 600 5 T 720 5 T 840 5 T 960 5 T 1080 5 T 1200 5" fill="none" stroke="#3f7d2f" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+      </svg>
     </div>
+    <div class="plants-grid" id="featuredGrid"></div>
+    <p style="text-align:center;margin-top:26px">
+      <a class="btn btn-green" href="catalogo.html">Explorar el catálogo completo <span class="arr">→</span></a>
+    </p>
+  </section>
 
-  </div>
+  <!-- CTA -->
+  <section class="cta-banner sketch">
+    <h2>¿Buscas una especie en particular?</h2>
+    <p>Te asesoramos para sembrar bien desde la primera plántula.</p>
+    <a class="btn" href="sobre-nosotros.html">Contáctanos por WhatsApp</a>
+  </section>
 
-  <!-- ================= PIE DE PÁGINA ================= -->
-  <footer class="sketch" id="nosotros">
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
     <div class="foot-inner">
-      <div class="foot-col">
-        <h4>Plantas de Urabá</h4>
+      <div>
+        <h4 class="foot-h">Plantas de Urabá</h4>
         <div class="foot-line">
-          <svg class="fIcon" viewBox="0 0 24 24" data-f="pin"></svg>
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M12 13 C7 20 7 21 12 21 C17 21 17 20 12 13"/></svg>
           <span>Urabá, Antioquia — Colombia</span>
         </div>
         <div class="foot-line">
-          <svg class="fIcon" viewBox="0 0 24 24" data-f="mail"></svg>
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
           <span>hola@plantasdeuraba.co</span>
         </div>
         <div class="foot-line">
-          <svg class="fIcon" viewBox="0 0 24 24" data-f="phone"></svg>
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 C6 3 5 4 5 5 C5 13 11 19 19 19 C20 19 21 18 21 17 L17 14 L15 16 C13 15 9 11 8 9 L10 7 L7 3 Z"/></svg>
           <span>+57 300 000 0000</span>
         </div>
         <div class="foot-line">
-          <svg class="fIcon" viewBox="0 0 24 24" data-f="wa"></svg>
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C7 3 3 7 3 12 C3 14 3.8 15.8 5 17.2 L4 21 L7.8 20 C9.2 21.2 11 22 12 22 C17 22 21 18 21 12 C21 7 17 3 12 3 Z"/><path d="M9 9.5 C9.2 10.6 10 12 11 13 C12 14 13.4 14.8 14.5 15 L15.5 13.5 L13.5 12 L12.5 13 C11.8 12.5 11.5 12.2 11 11.5 L12 10.5 L10.5 8.5 L9 9.5 Z"/></svg>
           <span>WhatsApp: +57 311 000 0000</span>
         </div>
       </div>
-      <div class="foot-col">
-        <h4>Visítanos</h4>
-        <p style="font-size:17px;color:var(--ink-soft);margin:6px 0;line-height:1.4">Vivero abierto de lunes a sábado,<br>8:00 am – 5:00 pm.<br>Visitas guiadas por reserva.</p>
+      <div>
+        <h4 class="foot-h">Horario</h4>
+        <div class="foot-line"><span>Lunes a sábado<br>8:00 am — 5:00 pm</span></div>
+        <div class="foot-line"><span>Visitas guiadas por reserva</span></div>
       </div>
-      <div class="foot-col">
-        <h4>Síguenos</h4>
+      <div>
+        <h4 class="foot-h">Síguenos</h4>
         <div class="socials">
-          <svg class="sIcon" viewBox="0 0 44 44" data-s="ig"></svg>
-          <svg class="sIcon" viewBox="0 0 44 44" data-s="fb"></svg>
-          <svg class="sIcon" viewBox="0 0 44 44" data-s="yt"></svg>
+          <a href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="#2b2b2b" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 H13 C10.8 4 9 5.8 9 8 V11 H6 V14 H9 V20 H12 V14 H15 Z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5 L15 12 L10.5 14.5 Z"/></svg>
+          </a>
         </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span class="dash">————</span> © 2026 Plantas de Urabá · boceto dibujado a mano con marcador <span class="dash">————</span>
+    <div class="credit">
+      © 2026 Plantas de Urabá · fotos: <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> · hecho a mano, en la web
     </div>
-  </footer>
+  </div>
+</footer>
 
-</div>
-
+<script src="datos.js"></script>
 <script>
-(function(){
-  const G='#2b2b2b';
-  const GREEN='rgba(107,164,71,.42)';
-  const GREEN2='rgba(84,140,58,.55)';
-  const BLUE='rgba(96,160,226,.5)';
-  const YELLOW='rgba(240,201,66,.5)';
-  const ORANGE='rgba(226,122,40,.6)';
-  const BROWN='rgba(128,86,45,.55)';
-  const RED='rgba(190,45,45,.5)';
-  const PINK='rgba(214,120,152,.55)';
+(function () {
+  var D = window.DATOS, U = window.UI;
 
-  const NS='http://www.w3.org/2000/svg';
-  const rc = rough.svg(document.createElementNS(NS,'svg'));
+  // Categorías
+  var catGrid = document.getElementById("catGrid");
+  D.categorias.forEach(function (c) {
+    catGrid.insertAdjacentHTML("beforeend", U.catCard(c));
+  });
 
-  function svgEl(tag,attrs){
-    const el=document.createElementNS(NS,tag);
-    if(attrs)for(const k in attrs)el.setAttribute(k,attrs[k]);
-    return el;
-  }
-  function clear(svg){ while(svg.firstChild) svg.removeChild(svg.firstChild); }
-  function n(){ return svgEl.apply(null,arguments); }
+  // Destacadas
+  var feat = document.getElementById("featuredGrid");
+  D.destacadas.forEach(function (id) {
+    var p = U.porId(id);
+    if (p) feat.insertAdjacentHTML("beforeend", U.plantCard(p));
+  });
 
-  // ---------- helpers ----------
-  function leaf(x,y,deg,len,opts){
-    opts=opts||{};
-    const a=deg*Math.PI/180;
-    const tipX=x+Math.cos(a)*len, tipY=y+Math.sin(a)*len;
-    const px=-Math.sin(a)*len*.45, py=Math.cos(a)*len*.45;
-    const mx=(x+tipX)/2, my=(y+tipY)/2;
-    return rc.path('M '+x+' '+y+' Q '+(mx+px)+' '+(my+py)+' '+tipX+' '+tipY+' Q '+(mx-px)+' '+(my-py)+' '+x+' '+y+' Z',
-      {stroke:G,strokeWidth:1.8,roughness:1.4,fill:opts.fill||GREEN});
-  }
-  function frond(x,y,deg,len){
-    const a=deg*Math.PI/180;
-    const tipX=x+Math.cos(a)*len, tipY=y+Math.sin(a)*len;
-    const px=-Math.sin(a)*len*.35, py=Math.cos(a)*len*.35;
-    const mx=(x+tipX)/2, my=(y+tipY)/2;
-    return rc.path('M '+x+' '+y+' Q '+(mx+px)+' '+(my+py)+' '+tipX+' '+tipY,
-      {stroke:G,strokeWidth:1.8,roughness:1.6,fill:'none'});
-  }
-  function trunkPath(d){
-    return rc.path(d,{stroke:G,strokeWidth:2.4,roughness:1.7,fill:'none'});
-  }
-  function fruit(x,y,rx,ry,fill,rot){
-    // simple sketchy fruit: ellipse + stem stroke on top
-    const e=rc.ellipse(x,y,rx,ry,{stroke:G,strokeWidth:1.7,roughness:1.6,fill:fill});
-    const nodes=[e];
-    nodes.push(rc.line(x-rx*.3,y-ry,x+rx*.3,y-ry,{stroke:G,strokeWidth:1.2,roughness:1.8}));
-    return nodes;
-  }
-
-  // ---------- plant drawings (viewBox 90x90) ----------
-  function drawBanana(svg,fruits){
-    svg.appendChild(trunkPath('M 46 86 C 47 72 47 60 46 38'));
-    const bas=46,topY=40;
-    [-130,-60,-105,-20].forEach(a=>svg.appendChild(leaf(bas,topY,a,32)));
-    // bunch
-    svg.appendChild(rc.path('M 42 42 Q 34 50 28 54',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-    const spots=[[28,58,7,10],[34,62,7,10],[25,66,6,9]];
-    spots.forEach(p=>fruit(p[0],p[1],p[2],p[3],fruits).forEach(el=>svg.appendChild(el)));
-  }
-  function banano(svg){ drawBanana(svg,YELLOW); }
-  function platanito(svg){ drawBanana(svg,'rgba(150,170,60,.55)'); }
-
-  function maracuya(svg){
-    svg.appendChild(rc.path('M 12 26 Q 42 14 72 24',{stroke:G,strokeWidth:2,roughness:1.8,fill:'none'}));
-    svg.appendChild(rc.path('M 34 20 Q 38 26 32 30',{stroke:G,strokeWidth:1.2,roughness:1.8,fill:'none'}));
-    // flor
-    svg.appendChild(rc.path('M 52 22 Q 56 26 52 31',{stroke:G,strokeWidth:1.2,roughness:1.8,fill:'none'}));
-    const fl=rc.circle(56,26,4,{stroke:G,strokeWidth:1.3,fill:'rgba(230,230,250,.5)',roughness:1.5}); svg.appendChild(fl);
-    // fruto
-    svg.appendChild(rc.circle(46,54,17,{stroke:G,strokeWidth:2,roughness:1.8,fill:'rgba(122,66,140,.3)'}));
-    svg.appendChild(rc.circle(46,54,4,{stroke:G,strokeWidth:1.2,roughness:1.5,fill:'rgba(90,40,110,.4)'}));
-    [[-60],[0],[60]].forEach(a=>{
-      const r=17*(a[0]*Math.PI/180); // 0
-    });
-    svg.appendChild(rc.path('M 46 37 Q 44 45 46 54',{stroke:G,strokeWidth:1.2,roughness:1.6,fill:'none'}));
-    svg.appendChild(rc.path('M 30 48 Q 38 50 45 51',{stroke:G,strokeWidth:1.2,roughness:1.6,fill:'none'}));
-    svg.appendChild(rc.path('M 60 48 Q 53 50 47 51',{stroke:G,strokeWidth:1.2,roughness:1.6,fill:'none'}));
-    svg.appendChild(leaf(30,32,-120,14,{fill:'rgba(90,150,80,.45)'}));
-  }
-
-  function cacao(svg){
-    svg.appendChild(trunkPath('M 46 86 L 46 50'));
-    svg.appendChild(leaf(46,50,-135,20));
-    svg.appendChild(leaf(46,50,-45,20));
-    svg.appendChild(leaf(44,54,180,15));
-    svg.appendChild(rc.line(46,50,46,58,{stroke:G,strokeWidth:1.6,roughness:1.6}));
-    // vaina
-    svg.appendChild(rc.ellipse(46,68,9.5,15,{stroke:G,strokeWidth:2,roughness:1.8,fill:BROWN}));
-    svg.appendChild(rc.path('M 46 54 Q 43 62 45 70',{stroke:G,strokeWidth:1.2,roughness:1.8,fill:'none'}));
-    svg.appendChild(rc.path('M 46 54 Q 49 62 47 70',{stroke:G,strokeWidth:1.2,roughness:1.8,fill:'none'}));
-    svg.appendChild(rc.line(46,54,46,70,{stroke:G,strokeWidth:1,roughness:1.8}));
-  }
-
-  function palmaAceite(svg){
-    svg.appendChild(trunkPath('M 46 86 C 47 70 46 54 46 34'));
-    for(let a=-175;a<=-5;a+=22){
-      svg.appendChild(frond(46,34,a,30));
-      // gotas
-      const rad=a*Math.PI/180, tipx=46+Math.cos(rad)*30, tipy=34+Math.sin(rad)*30;
-      if(a%44===0) svg.appendChild(rc.circle(tipx,tipy,3,{stroke:G,strokeWidth:1,fill:ORANGE,roughness:1.6}));
-    }
-    // racimos rojos
-    [[42,40],[52,38],[46,48]].forEach(p=>{
-      svg.appendChild(rc.circle(p[0],p[1],5,{stroke:G,strokeWidth:1.2,fill:RED,roughness:1.6}));
-      svg.appendChild(rc.circle(p[0]+4,p[1]+4,4,{stroke:G,strokeWidth:1.2,fill:RED,roughness:1.6}));
-    });
-  }
-
-  function coco(svg){
-    svg.appendChild(trunkPath('M 44 86 C 45 64 48 48 50 32'));
-    for(let a=-160;a<=-20;a+=24){ svg.appendChild(frond(50,32,a,30)); }
-    svg.appendChild(frond(50,32,0,26));
-    svg.appendChild(frond(50,32,180,26));
-    svg.appendChild(rc.circle(42,40,6,{stroke:G,strokeWidth:1.7,fill:BROWN,roughness:1.7}));
-    svg.appendChild(rc.circle(53,44,6,{stroke:G,strokeWidth:1.7,fill:BROWN,roughness:1.7}));
-  }
-
-  function chontaduro(svg){
-    svg.appendChild(trunkPath('M 46 86 L 46 40'));
-    for(let a=-150;a<=-30;a+=24){ svg.appendChild(frond(46,40,a,27)); }
-    for(let a=0;a<8;a++){
-      const ang=a*45*Math.PI/180;
-      svg.appendChild(rc.circle(46+Math.cos(ang)*7,40+Math.sin(ang)*7-2,3.6,{stroke:G,strokeWidth:1,fill:ORANGE,roughness:1.7}));
-    }
-  }
-
-  function treeBase(svg,canopy){
-    svg.appendChild(trunkPath('M 46 86 L 46 48'));
-    svg.appendChild(rc.line(46,70,38,80,{stroke:G,strokeWidth:1.6,roughness:1.6}));
-    svg.appendChild(rc.line(46,78,54,87,{stroke:G,strokeWidth:1.6,roughness:1.6}));
-    canopy(svg);
-  }
-  function canopyEllipse(svg,x,y,rx,ry,fill){ svg.appendChild(rc.ellipse(x,y,rx,ry,{stroke:G,strokeWidth:2,roughness:1.8,fill:fill||GREEN})); }
-
-  function melina(svg){
-    treeBase(svg,()=>{
-      canopyEllipse(svg,40,32,26,18);
-      canopyEllipse(svg,54,36,20,16,'rgba(120,185,90,.4)');
-    });
-  }
-  function roble(svg){
-    treeBase(svg,()=>{
-      canopyEllipse(svg,44,32,24,17);
-      for(let i=0;i<6;i++){
-        const px=30+Math.random()*28, py=26+Math.random()*14;
-        svg.appendChild(rc.circle(px,py,3,{stroke:G,strokeWidth:1,fill:PINK,roughness:1.6}));
-      }
-    });
-  }
-  function guamo(svg){
-    treeBase(svg,()=>{
-      canopyEllipse(svg,42,32,24,17);
-      // vainas colgantes
-      [[38,40],[50,42]].forEach(p=>{
-        svg.appendChild(rc.path('M '+p[0]+' '+p[1]+' Q '+(p[0]+2)+' '+(p[1]+10)+' '+p[0]+' '+(p[1]+16),{stroke:G,strokeWidth:1.4,roughness:1.8,fill:'none'}));
-        svg.appendChild(rc.ellipse(p[0],p[1]+18,3,7,{stroke:G,strokeWidth:1.2,fill:'rgba(90,150,80,.5)',roughness:1.7}));
-      });
-    });
-  }
-  function saman(svg){
-    svg.appendChild(trunkPath('M 46 86 L 46 44'));
-    canopyEllipse(svg,42,30,30,19);
-    svg.appendChild(rc.ellipse(56,36,16,12,{stroke:G,strokeWidth:1.8,roughness:1.8,fill:'rgba(120,185,90,.4)'}));
-    svg.appendChild(rc.path('M 40 42 Q 34 50 36 56',{stroke:G,strokeWidth:1.4,roughness:1.8,fill:'none'}));
-    svg.appendChild(rc.ellipse(36,58,3,8,{stroke:G,strokeWidth:1.2,fill:'rgba(90,150,80,.5)',roughness:1.7}));
-  }
-
-  function borujo(svg){
-    svg.appendChild(trunkPath('M 46 84 C 45 76 46 68 46 60'));
-    svg.appendChild(leaf(46,60,-125,20));
-    svg.appendChild(leaf(46,60,-55,20));
-    svg.appendChild(rc.line(46,62,46,66,{stroke:G,strokeWidth:1.5,roughness:1.6}));
-    svg.appendChild(rc.circle(46,72,13,{stroke:G,strokeWidth:2,roughness:1.8,fill:'rgba(120,84,50,.6)'}));
-    svg.appendChild(rc.path('M 42 70 Q 46 76 50 71',{stroke:G,strokeWidth:1,roughness:1.7,fill:'none'}));
-  }
-
-  function achiote(svg){
-    svg.appendChild(trunkPath('M 46 84 C 45 76 46 68 46 62'));
-    svg.appendChild(leaf(46,62,-130,18));
-    svg.appendChild(leaf(46,62,-50,18));
-    svg.appendChild(rc.circle(46,70,8,{stroke:G,strokeWidth:1.8,fill:RED,roughness:1.7}));
-    for(let a=0;a<8;a++){
-      const ang=a*45*Math.PI/180;
-      svg.appendChild(rc.line(46,70,46+Math.cos(ang)*11,70+Math.sin(ang)*11,{stroke:G,strokeWidth:1,roughness:1.8}));
-    }
-    svg.appendChild(rc.circle(42,72,1.6,{stroke:G,strokeWidth:1,fill:'#fff',roughness:1.4}));
-  }
-
-  function bijao(svg){
-    svg.appendChild(rc.ellipse(32,68,24,14,{stroke:G,strokeWidth:1.8,fill:GREEN,roughness:1.7}));
-    svg.appendChild(rc.ellipse(60,68,24,14,{stroke:G,strokeWidth:1.8,fill:GREEN,roughness:1.7}));
-    svg.appendChild(rc.ellipse(46,60,16,20,{stroke:G,strokeWidth:1.8,fill:GREEN2,roughness:1.7}));
-    svg.appendChild(rc.line(46,76,46,60,{stroke:G,strokeWidth:1.2,roughness:1.6}));
-    svg.appendChild(rc.line(32,78,32,68,{stroke:G,strokeWidth:1.2,roughness:1.6}));
-    svg.appendChild(rc.line(60,78,60,68,{stroke:G,strokeWidth:1.2,roughness:1.6}));
-    svg.appendChild(rc.line(32,86,32,80,{stroke:G,strokeWidth:1.5,roughness:1.6}));
-    svg.appendChild(rc.line(60,86,60,80,{stroke:G,strokeWidth:1.5,roughness:1.6}));
-  }
-
-  const PLANTS={banano,platanito,maracuya,cacao,palmaAceite,coco,chontaduro,melina,roble,guamo,saman,borujo,achiote,bijao};
-
-  // ---------- hero landscape (viewBox 480x330) ----------
-  function hero(svg){
-    // sol
-    svg.appendChild(rc.circle(410,58,26,{stroke:G,strokeWidth:2,roughness:1.8,fill:'rgba(255,204,80,.55)'}));
-    for(let a=0;a<8;a++){
-      const ang=a*45*Math.PI/180;
-      svg.appendChild(rc.line(410+Math.cos(ang)*33,58+Math.sin(ang)*33,410+Math.cos(ang)*40,58+Math.sin(ang)*40,{stroke:G,strokeWidth:1.4,roughness:1.8}));
-    }
-    // nubes
-    svg.appendChild(rc.ellipse(120,60,30,12,{stroke:'#8a8a8a',strokeWidth:1.4,roughness:2,fill:'rgba(248,246,240,.9)'}));
-    svg.appendChild(rc.ellipse(140,55,20,9,{stroke:'#8a8a8a',strokeWidth:1.4,roughness:2,fill:'rgba(248,246,240,.9)'}));
-    svg.appendChild(rc.ellipse(340,88,26,10,{stroke:'#8a8a8a',strokeWidth:1.4,roughness:2,fill:'rgba(248,246,240,.9)'}));
-    // colinas
-    svg.appendChild(rc.path('M 0 330 L 0 250 Q 120 200 260 250 Q 380 288 480 246 L 480 330 Z',
-      {stroke:G,strokeWidth:2,roughness:1.6,fill:'rgba(150,195,120,.4)'}));
-    svg.appendChild(rc.path('M 480 330 L 480 262 Q 340 220 200 268 Q 90 308 0 280 L 0 330 Z',
-      {stroke:G,strokeWidth:2,roughness:1.6,fill:'rgba(120,175,95,.4)'}));
-    // río (azul marcador)
-    svg.appendChild(rc.path('M 300 150 Q 258 200 298 246 Q 340 292 318 330 L 205 330 Q 232 286 200 244 Q 168 204 214 150 Z',
-      {stroke:G,strokeWidth:2,roughness:1.5,fill:BLUE}));
-    svg.appendChild(rc.path('M 262 210 Q 280 214 296 212',{stroke:G,strokeWidth:1.2,roughness:2,fill:'none'}));
-    svg.appendChild(rc.path('M 244 252 Q 262 258 282 254',{stroke:G,strokeWidth:1.2,roughness:2,fill:'none'}));
-    // palma
-    const palmG=svgEl('g',{transform:'translate(52,220) scale(1.6)'});
-    palmG.appendChild(trunkPath('M 12 44 C 13 32 12 22 12 12'));
-    for(let a=-150;a<=-30;a+=24){ palmG.appendChild(frond(12,12,a,15)); }
-    palmG.appendChild(rc.circle(8,16,3.4,{stroke:G,strokeWidth:1,fill:BROWN,roughness:1.7}));
-    svg.appendChild(palmG);
-    // banano
-    const banG=svgEl('g',{transform:'translate(388,210) scale(1.5)'});
-    banG.appendChild(trunkPath('M 12 44 C 13 34 13 26 12 14'));
-    [-120,-60].forEach(a=>banG.appendChild(leaf(12,14,a,17)));
-    banG.appendChild(rc.path('M 11 15 Q 6 20 4 23',{stroke:G,strokeWidth:1.2,roughness:1.8,fill:'none'}));
-    fruit(3,26,4,7,YELLOW).forEach(el=>banG.appendChild(el));
-    svg.appendChild(banG);
-    // agricultor
-    const f=svgEl('g');
-    f.appendChild(rc.circle(150,196,10,{stroke:G,strokeWidth:2,roughness:1.8,fill:'rgba(245,225,200,.8)'}));
-    f.appendChild(rc.path('M 138 190 L 138 184 L 162 184 L 162 190 Z',{stroke:G,strokeWidth:1.8,roughness:1.8,fill:'rgba(200,160,100,.5)'}));
-    f.appendChild(rc.path('M 150 206 C 150 220 150 228 150 240',{stroke:G,strokeWidth:2.2,roughness:1.8,fill:'none'}));
-    f.appendChild(rc.path('M 150 214 L 138 222',{stroke:G,strokeWidth:2.2,roughness:1.8,fill:'none'}));
-    f.appendChild(rc.path('M 150 214 L 162 222',{stroke:G,strokeWidth:2.2,roughness:1.8,fill:'none'}));
-    f.appendChild(rc.path('M 150 240 L 140 254',{stroke:G,strokeWidth:2.2,roughness:1.8,fill:'none'}));
-    f.appendChild(rc.path('M 150 240 L 160 254',{stroke:G,strokeWidth:2.2,roughness:1.8,fill:'none'}));
-    // plántula en las manos
-    f.appendChild(rc.path('M 138 220 Q 134 226 132 231',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-    f.appendChild(leaf(132,231,-90,9,{fill:GREEN2}));
-    f.appendChild(leaf(132,231,-45,8));
-    svg.appendChild(f);
-    // pájaros
-    svg.appendChild(rc.path('M 120 120 Q 126 114 132 120',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-    svg.appendChild(rc.path('M 160 110 Q 166 104 172 110',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-    // anotaciones rojas
-    const anno=(x,y,txt,ang)=>{
-      const t=svgEl('text',{x:x,y:y,transform:'rotate('+(ang||0)+' '+(x+30)+' '+(y+4)+')','font-family':"'Architects Daughter',cursive",'font-size':'15px',fill:RED});
-      t.textContent=txt; svg.appendChild(t);
-    };
-    anno(60,262,'palma',-2);
-    svg.appendChild(rc.path('M 96 262 Q 108 250 116 244',{stroke:RED,strokeWidth:1.2,roughness:1.5,fill:'none'}));
-    anno(330,238,'Río Atrato',3);
-    svg.appendChild(rc.path('M 308 236 Q 296 240 288 240',{stroke:RED,strokeWidth:1.2,roughness:1.5,fill:'none'}));
-    anno(120,262,'agricultor + plántula',2);
-    svg.appendChild(rc.path('M 176 258 Q 150 244 150 240',{stroke:RED,strokeWidth:1.2,roughness:1.5,fill:'none'}));
-    anno(400,190,'banano',-2);
-    svg.appendChild(rc.path('M 372 192 Q 386 196 394 204',{stroke:RED,strokeWidth:1.2,roughness:1.5,fill:'none'}));
-  }
-
-  // ---------- footer icons ----------
-  function footIcons(){
-    const ICONS={
-      pin:svg=>{
-        svg.appendChild(rc.circle(12,10,5,{stroke:G,strokeWidth:1.7,fill:RED,roughness:1.8}));
-        svg.appendChild(rc.path('M 12 16 C 8 22 8 24 12 24 C 16 24 16 22 12 16',{stroke:G,strokeWidth:1.7,roughness:1.8,fill:'none'}));
-      },
-      mail:svg=>{
-        svg.appendChild(rc.rectangle(3,5,18,13,{stroke:G,strokeWidth:1.7,roughness:1.8,fill:'rgba(240,234,210,.4)'}));
-        svg.appendChild(rc.path('M 4 7 L 12 14 L 20 7',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-      },
-      phone:svg=>{
-        svg.appendChild(rc.path('M 7 4 C 6 8 7 15 12 17 C 17 19 20 15 20 14 L 15 12 L 13 14 C 11 13 10 11 10 8 L 12 7 L 9 4 Z',{stroke:G,strokeWidth:1.7,roughness:1.8,fill:'rgba(240,234,210,.4)'}));
-      },
-      wa:svg=>{
-        svg.appendChild(rc.circle(12,12,9.5,{stroke:G,strokeWidth:1.7,fill:'rgba(120,190,110,.4)',roughness:1.8}));
-        svg.appendChild(rc.path('M 7.5 16.5 L 8.5 12.5 Q 9 12 9.5 13 Q 10.5 12 11 14 Q 13.5 13.5 14 15 Q 15 14 16.5 13.5 L 17 15.5 C 15 17 10 18 7.5 16.5',{stroke:G,strokeWidth:1.4,roughness:1.8,fill:'none'}));
-      }
-    };
-    document.querySelectorAll('.fIcon').forEach(svg=>{ clear(svg); ICONS[svg.dataset.f](svg); });
-    const SOCIALS={
-      ig:svg=>{
-        svg.appendChild(rc.rectangle(9,9,26,26,{stroke:G,strokeWidth:2,roughness:2,fill:'rgba(240,234,210,.4)'}));
-        svg.appendChild(rc.circle(22,22,6.5,{stroke:G,strokeWidth:1.8,roughness:1.8,fill:'none'}));
-        svg.appendChild(rc.circle(22,22,1.8,{stroke:G,strokeWidth:1.4,roughness:1.6,fill:G}));
-        svg.appendChild(rc.circle(29,15,1.4,{stroke:G,strokeWidth:1.2,roughness:1.4,fill:G}));
-      },
-      fb:svg=>{
-        svg.appendChild(rc.circle(22,22,17,{stroke:G,strokeWidth:2,roughness:2,fill:'rgba(120,160,220,.4)'}));
-        svg.appendChild(rc.path('M 26 11 L 26 16 Q 31 16 31 19 L 26 19 L 26 26 L 22 26 L 22 19 L 19 19 L 19 16 L 22 16 L 22 13 C 22 11 24 11 26 11 Z',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-      },
-      yt:svg=>{
-        svg.appendChild(rc.rectangle(8,15,28,19,{stroke:G,strokeWidth:2,roughness:2,fill:'rgba(230,120,110,.4)'}));
-        svg.appendChild(rc.circle(22,24,2,{stroke:G,strokeWidth:1.6,roughness:1.5,fill:G}));
-        svg.appendChild(rc.path('M 21 20 L 21 28 L 27 24 Z',{stroke:G,strokeWidth:1.2,roughness:1.5,fill:G}));
-      }
-    };
-    document.querySelectorAll('.sIcon').forEach(svg=>{ clear(svg); SOCIALS[svg.dataset.s](svg); });
-  }
-
-  // ---------- cat icons ----------
-  function catIcons(){
-    const icons=document.querySelectorAll('.catIcon');
-    icons.forEach((svg,i)=>{
-      clear(svg);
-      svg.appendChild(rc.circle(20,20,13,{stroke:G,strokeWidth:2,roughness:2,fill:'rgba(240,234,210,.5)'}));
-      svg.appendChild(rc.path('M 20 20 Q 12 16 13 10',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-      svg.appendChild(rc.path('M 20 20 Q 27 12 30 16',{stroke:G,strokeWidth:1.6,roughness:1.8,fill:'none'}));
-    });
-  }
-
-  function brandIcon(){
-    const svg=document.getElementById('brandIcon');
-    clear(svg);
-    svg.appendChild(trunkPath('M 26 48 L 26 22'));
-    svg.appendChild(leaf(26,20,-120,16));
-    svg.appendChild(leaf(26,20,-60,16));
-    svg.appendChild(leaf(26,24,180,12));
-    svg.appendChild(rc.circle(16,20,5,{stroke:G,strokeWidth:1.4,fill:GREEN,roughness:1.7}));
-  }
-
-  // ---------- plant icons ----------
-  function plantIcons(){
-    document.querySelectorAll('.plant-icon').forEach(svg=>{
-      clear(svg);
-      const fn=PLANTS[svg.dataset.plant];
-      if(fn) fn(svg);
-    });
-  }
-
-  // ---------- squiggles ----------
-  function squiggleUnderlines(){
-    document.querySelectorAll('.link').forEach(link=>{
-      let sq=link.querySelector('.squiggle');
-      const w=link.getBoundingClientRect().width;
-      sq.setAttribute('viewBox','0 0 '+w+' 8');
-      clear(sq);
-      sq.appendChild(rc.line(0,4,w,4,{stroke:'#6a6a6a',strokeWidth:2,roughness:2.4,fill:'none'}));
-    });
-    document.querySelectorAll('svg.squig').forEach(sq=>{
-      const w=sq.getBoundingClientRect().width;
-      sq.setAttribute('viewBox','0 0 '+w+' 7');
-      clear(sq);
-      sq.appendChild(rc.line(0,4,w,4,{stroke:'#a89a80',strokeWidth:2,roughness:2.6,fill:'none'}));
-    });
-  }
-
-  // ---------- hero pill ----------
-  function heroPill(){
-    const pill=document.getElementById('heroPill');
-    const r=pill.getBoundingClientRect();
-    let svg=pill.querySelector('svg.pillbox');
-    if(!svg){ svg=svgEl('svg',{class:'pillbox'}); pill.appendChild(svg); }
-    svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height);
-    svg.setAttribute('style','position:absolute;inset:0;pointer-events:none');
-    clear(svg);
-    svg.appendChild(rc.rectangle(0,0,r.width,r.height,{stroke:G,strokeWidth:1.6,roughness:2.2,fill:'rgba(255,240,180,.25)'}));
-  }
-
-  // ---------- sketch boxes ----------
-  function sketchBoxes(){
-    document.querySelectorAll('.sketch').forEach(el=>{
-      let svg=el.querySelector(':scope > svg.boxlines');
-      if(!svg){ svg=svgEl('svg',{class:'boxlines'}); el.insertBefore(svg,el.firstChild); }
-      const r=el.getBoundingClientRect();
-      if(r.width<20||r.height<20) return;
-      svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height);
-      clear(svg);
-      svg.appendChild(rc.rectangle(0,0,r.width,r.height,{stroke:G,strokeWidth:2,roughness:1.8,fill:'none'}));
-      svg.appendChild(rc.rectangle(4,4,r.width-8,r.height-8,{stroke:'#b9b0a0',strokeWidth:1.2,roughness:2.2,fill:'none'}));
-    });
-  }
-
-  function drawAll(){
-    sketchBoxes();
-    squiggleUnderlines();
-    plantIcons();
-    catIcons();
-    brandIcon();
-    footIcons();
-    heroPill();
-    hero(document.getElementById('hero'));
-  }
-
-  let t;
-  window.addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(drawAll,180); });
-  window.addEventListener('load',drawAll);
-  drawAll();
-
-  // navegación suave
-  document.querySelectorAll('.link').forEach(a=>{
-    a.addEventListener('click',e=>{
-      const id=a.getAttribute('href');
-      if(id&&id[0]==='#'){
-        const el=document.querySelector(id);
-        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
-      }
+  // Cards -> catálogo
+  document.querySelectorAll("#featuredGrid .plant-card").forEach(function (card) {
+    card.addEventListener("click", function () {
+      window.location.href = "catalogo.html#planta-" + card.dataset.id;
     });
   });
+
+  U.initImgFallback();
 })();
 </script>
 </body>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo · Plantas de Urabá</title>
+<meta name="description" content="Catálogo completo del vivero Plantas de Urabá: agrícolas, palmas, maderables y especies nativas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="index.html" aria-label="Plantas de Urabá - Inicio">
+      <svg class="brand-logo" viewBox="0 0 48 48" fill="none" stroke="#2b2b2b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 38 C10 20 22 8 40 8 C40 26 28 38 10 38 Z"/>
+        <path d="M12 36 C20 28 27 21 36 12"/>
+        <path d="M23 23 C25 26 27 24 25 21"/>
+      </svg>
+      <span>
+        <span class="brand-name">Plantas de Urabá</span><br>
+        <span class="brand-region">Urabá · Antioquia, Colombia</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link active" href="catalogo.html">Catálogo</a>
+      <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
+      <a class="nav-cta" href="catalogo.html">Ver Catálogo</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="sec" style="padding-top:34px">
+    <div class="sec-head">
+      <h1 class="sec-title">Catálogo de especies</h1>
+      <span class="sec-note" id="totalNote">cargando…</span>
+    </div>
+    <p style="font-size:18px;color:var(--ink-soft);margin:4px 0 0">Todas nuestras plantas se cultivan en el vivero y se entregan listas para sembrar. Haz clic en una tarjeta para ver el detalle.</p>
+
+    <div class="chips" id="chips" role="tablist" aria-label="Filtrar por categoría">
+      <button class="chip active" data-filter="todos" role="tab">Todos</button>
+    </div>
+
+    <div class="plants-grid" id="grid"></div>
+  </section>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <span class="uso" id="modalUso"></span>
+      <h2 id="modalTitle"></h2>
+      <p class="sci" id="modalSci"></p>
+      <p class="desc" id="modalDesc"></p>
+      <div class="modal-actions">
+        <a class="btn btn-green" id="modalWa" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        <button class="btn btn-ghost" id="modalClose2">Cerrar</button>
+      </div>
+      <p class="modal-cat" id="modalCat"></p>
+    </div>
+  </div>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <h4 class="foot-h">Plantas de Urabá</h4>
+        <div class="foot-line">
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M12 13 C7 20 7 21 12 21 C17 21 17 20 12 13"/></svg>
+          <span>Urabá, Antioquia — Colombia</span>
+        </div>
+        <div class="foot-line">
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
+          <span>hola@plantasdeuraba.co</span>
+        </div>
+        <div class="foot-line">
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 C6 3 5 4 5 5 C5 13 11 19 19 19 C20 19 21 18 21 17 L17 14 L15 16 C13 15 9 11 8 9 L10 7 L7 3 Z"/></svg>
+          <span>+57 300 000 0000</span>
+        </div>
+        <div class="foot-line">
+          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C7 3 3 7 3 12 C3 14 3.8 15.8 5 17.2 L4 21 L7.8 20 C9.2 21.2 11 22 12 22 C17 22 21 18 21 12 C21 7 17 3 12 3 Z"/><path d="M9 9.5 C9.2 10.6 10 12 11 13 C12 14 13.4 14.8 14.5 15 L15.5 13.5 L13.5 12 L12.5 13 C11.8 12.5 11.5 12.2 11 11.5 L12 10.5 L10.5 8.5 L9 9.5 Z"/></svg>
+          <span>WhatsApp: +57 311 000 0000</span>
+        </div>
+      </div>
+      <div>
+        <h4 class="foot-h">Horario</h4>
+        <div class="foot-line"><span>Lunes a sábado<br>8:00 am — 5:00 pm</span></div>
+        <div class="foot-line"><span>Visitas guiadas por reserva</span></div>
+      </div>
+      <div>
+        <h4 class="foot-h">Síguenos</h4>
+        <div class="socials">
+          <a href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="#2b2b2b" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 H13 C10.8 4 9 5.8 9 8 V11 H6 V14 H9 V20 H12 V14 H15 Z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5 L15 12 L10.5 14.5 Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="credit">
+      © 2026 Plantas de Urabá · fotos: <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> · hecho a mano, en la web
+    </div>
+  </div>
+</footer>
+
+<script src="datos.js"></script>
+<script>
+(function () {
+  var D = window.DATOS, U = window.UI;
+  var grid = document.getElementById("grid");
+  var chipsBox = document.getElementById("chips");
+  var totalNote = document.getElementById("totalNote");
+  var activo = "todos";
+
+  // Chips de filtro
+  D.categorias.forEach(function (c) {
+    var b = document.createElement("button");
+    b.className = "chip";
+    b.dataset.filter = c.id;
+    b.textContent = c.nombre;
+    b.setAttribute("role", "tab");
+    chipsBox.appendChild(b);
+  });
+
+  // Render de tarjetas
+  var cards = [];
+  D.categorias.forEach(function (c) {
+    c.plantas.forEach(function (p) {
+      p.categoria = c;
+      cards.push(p);
+    });
+  });
+  cards.forEach(function (p) {
+    grid.insertAdjacentHTML("beforeend", U.plantCard(p));
+  });
+
+  totalNote.textContent = U.totalEspecies() + " especies · " + D.categorias.length + " categorías";
+
+  function aplicarFiltro() {
+    grid.querySelectorAll(".plant-card").forEach(function (card) {
+      var ok = activo === "todos" || card.dataset.cat === activo;
+      card.classList.toggle("hidden", !ok);
+    });
+  }
+  chipsBox.addEventListener("click", function (e) {
+    var chip = e.target.closest(".chip");
+    if (!chip) return;
+    activo = chip.dataset.filter;
+    chipsBox.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("active"); });
+    chip.classList.add("active");
+    aplicarFiltro();
+  });
+
+  // Modal
+  var modal = document.getElementById("modal");
+  var modalImg = document.getElementById("modalImg");
+  var modalUso = document.getElementById("modalUso");
+  var modalTitle = document.getElementById("modalTitle");
+  var modalSci = document.getElementById("modalSci");
+  var modalDesc = document.getElementById("modalDesc");
+  var modalCat = document.getElementById("modalCat");
+  var modalWa = document.getElementById("modalWa");
+
+  function abrir(p) {
+    modalImg.src = p.imagen;
+    modalImg.alt = p.nombre_comun;
+    modalUso.textContent = p.uso;
+    modalTitle.textContent = p.nombre_comun;
+    modalSci.textContent = p.nombre_cientifico;
+    modalDesc.textContent = p.descripcion;
+    modalCat.textContent = "Categoría: " + p.categoria.nombre;
+    modalWa.href = "https://wa.me/" + D.contacto.whatsapp.replace(/\D/g, "") +
+      "?text=" + encodeURIComponent("Hola, me interesa la especie " + p.nombre_comun + " del vivero " + D.vivero + ".");
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function cerrar() {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  grid.addEventListener("click", function (e) {
+    var card = e.target.closest(".plant-card");
+    if (!card) return;
+    var p = U.porId(card.dataset.id);
+    if (p) abrir(p);
+  });
+  document.getElementById("modalClose").addEventListener("click", cerrar);
+  document.getElementById("modalClose2").addEventListener("click", cerrar);
+  modal.addEventListener("click", function (e) { if (e.target === modal) cerrar(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") cerrar(); });
+
+  // Enlace profundo #planta-xxx o #categoria
+  function irDesdeHash() {
+    var h = window.location.hash;
+    if (!h) return;
+    if (h.indexOf("#planta-") === 0) {
+      var p = U.porId(h.slice(7));
+      if (p) {
+        var chip = chipsBox.querySelector('[data-filter="' + p.categoria.id + '"]');
+        if (chip) chip.click();
+        var card = grid.querySelector('.plant-card[data-id="' + p.id + '"]');
+        if (card) {
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+          card.style.outline = "3px dashed #c0392b";
+          setTimeout(function () { card.style.outline = ""; }, 2600);
+          setTimeout(function () { abrir(p); }, 400);
+        }
+      }
+    } else if (h.indexOf("#") === 0) {
+      var chip2 = chipsBox.querySelector('[data-filter="' + h.slice(1) + '"]');
+      if (chip2) chip2.click();
+    }
+  }
+
+  U.initImgFallback();
+  aplicarFiltro();
+  irDesdeHash();
+})();
+</script>
+</body>
+</html>
