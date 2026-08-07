@@ -2,6 +2,8 @@
 
 Landing page para el vivero **Plantas de Urabá** (Urabá, Antioquia — Colombia), con estilo visual inspirado en [Excalidraw](https://excalidraw.com): trazos a mano alzada, líneas irregulares y aspecto de pizarra virtual.
 
+**Sitio en vivo:** https://plantas-uraba-lab-sena.netlify.app/
+
 ## Boceto de interfaz
 
 El archivo `boceto-landing.html` es un boceto navegable de la landing page, renderizado en el navegador con [Rough.js](https://roughjs.com) (la misma librería de dibujo que usa Excalidraw).
