@@ -217,6 +217,7 @@ window.UI = {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m];
     });
   },
+  base: "",
   totalEspecies: function () {
     return window.DATOS.categorias.reduce(function (n, c) { return n + c.plantas.length; }, 0);
   },
@@ -234,33 +235,33 @@ window.UI = {
   },
   foto: function (p) {
     if (p.imagen) {
-      return '<div class="plant-photo"><img src="' + this.esc(p.imagen) + '" alt="' + this.esc(p.nombre_comun) + '" loading="lazy" decoding="async"></div>';
+      return '<div class="plant-photo"><img class="card-img-top img-fluid" style="height:200px;width:100%;object-fit:cover" src="' + this.esc(p.imagen) + '" alt="' + this.esc(p.nombre_comun) + '" loading="lazy" decoding="async"></div>';
     }
-    return '<div class="plant-photo no-img"><span class="no-img-tag">' + this.esc(p.nombre_comun.charAt(0)) + '</span></div>';
+    return '<div class="plant-photo card-img-top no-img d-flex align-items-center justify-content-center" style="height:200px"><span class="no-img-tag">' + this.esc(p.nombre_comun.charAt(0)) + '</span></div>';
   },
   plantCard: function (p) {
     return (
-      '<article class="plant-card sketch" data-cat="' + this.esc(p.categoria.id) + '" data-id="' + this.esc(p.id) + '">' +
+      '<article class="card h-100 plant-card shadow-sm" data-cat="' + this.esc(p.categoria.id) + '" data-id="' + this.esc(p.id) + '">' +
         this.foto(p) +
-        '<div class="plant-body">' +
-          '<span class="uso">' + this.esc(p.uso) + '</span>' +
-          '<h3>' + this.esc(p.nombre_comun) + '</h3>' +
-          '<p class="sci"><em>' + this.esc(p.nombre_cientifico) + '</em></p>' +
-          '<p class="desc">' + this.esc(p.descripcion) + '</p>' +
-          '<span class="plant-link">Ver detalle <span class="arr">→</span></span>' +
+        '<div class="card-body d-flex flex-column">' +
+          '<span class="badge text-bg-success align-self-start mb-2">' + this.esc(p.uso) + '</span>' +
+          '<h3 class="card-title h6 mb-1">' + this.esc(p.nombre_comun) + '</h3>' +
+          '<p class="mb-2 text-secondary fst-italic small"><em>' + this.esc(p.nombre_cientifico) + '</em></p>' +
+          '<p class="card-text small text-secondary flex-grow-1 mb-3">' + this.esc(p.descripcion) + '</p>' +
+          '<span class="btn btn-sm btn-outline-success align-self-start">Ver detalle <span class="arr">→</span></span>' +
         '</div>' +
       '</article>'
     );
   },
   catCard: function (c) {
     return (
-      '<a class="cat-card sketch" href="catalogo.html#' + this.esc(c.id) + '">' +
-        '<div class="cat-photo"><img src="' + this.esc(c.portada) + '" alt="' + this.esc(c.nombre) + '" loading="lazy" decoding="async"></div>' +
-        '<div class="cat-body">' +
-          '<h3>' + this.esc(c.nombre) + '</h3>' +
-          '<p class="cat-count">' + c.plantas.length + ' especies</p>' +
-          '<p class="cat-desc">' + this.esc(c.descripcion) + '</p>' +
-          '<span class="cat-link">Explorar →</span>' +
+      '<a class="card h-100 cat-card text-decoration-none text-body shadow-sm" href="' + this.base + 'catalogo.html#' + this.esc(c.id) + '">' +
+        '<div class="cat-photo"><img class="card-img-top img-fluid" style="height:170px;width:100%;object-fit:cover" src="' + this.esc(c.portada) + '" alt="' + this.esc(c.nombre) + '" loading="lazy" decoding="async"></div>' +
+        '<div class="card-body d-flex flex-column">' +
+          '<h3 class="card-title h6 mb-1">' + this.esc(c.nombre) + '</h3>' +
+          '<p class="text-success small mb-1">' + c.plantas.length + ' especies</p>' +
+          '<p class="card-text small text-secondary flex-grow-1 mb-3">' + this.esc(c.descripcion) + '</p>' +
+          '<span class="btn btn-sm btn-success align-self-start">Explorar <span class="arr">→</span></span>' +
         '</div>' +
       '</a>'
     );
@@ -271,7 +272,7 @@ window.UI = {
         var box = img.closest(".plant-photo, .cat-photo, .story-photo");
         if (box) {
           img.style.display = "none";
-          box.classList.add("no-img");
+          box.classList.add("no-img", "d-flex", "align-items-center", "justify-content-center");
           if (!box.querySelector(".no-img-tag")) {
             var t = document.createElement("span");
             t.className = "no-img-tag";

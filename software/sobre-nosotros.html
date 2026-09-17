@@ -5,178 +5,174 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sobre Nosotros · Plantas de Urabá</title>
 <meta name="description" content="Conoce a las personas curiosas que investigan y documentan la flora de Urabá.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="estilos.css">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-<header class="site-head">
-  <div class="wrap head-inner">
-    <a class="brand" href="../index.html" aria-label="Plantas de Urabá - Inicio">
-      <img class="brand-logo" src="logo.svg" alt="Logo de Plantas de Urabá">
-      <span>
-        <span class="brand-name">Plantas de Urabá</span><br>
-        <span class="brand-region">Urabá · Antioquia, Colombia</span>
+<nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html" aria-label="Plantas de Urabá - Inicio">
+      <img class="rounded-circle border" src="logo.svg" alt="Logo de Plantas de Urabá" width="44" height="44">
+      <span class="lh-1">
+        <span class="fw-bold fs-5 d-block">Plantas de Urabá</span>
+        <small class="text-body-secondary">Urabá · Antioquia, Colombia</small>
       </span>
     </a>
-    <nav class="nav" aria-label="Navegación principal">
-      <a class="nav-link" href="../index.html">Inicio</a>
-      <a class="nav-link" href="catalogo.html">Catálogo</a>
-      <a class="nav-link active" href="sobre-nosotros.html">Sobre Nosotros</a>
-      <a class="nav-cta" href="catalogo.html">Ver Catálogo</a>
-    </nav>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPrincipal" aria-controls="navPrincipal" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navPrincipal">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li class="nav-item mt-2 mt-lg-0 ms-lg-2"><a class="btn btn-success btn-sm px-3" href="catalogo.html">Ver Catálogo</a></li>
+      </ul>
+    </div>
   </div>
-</header>
+</nav>
 
-<main class="wrap">
-
-  <section class="sec" style="padding-top:34px">
-    <div class="sec-head">
-      <h1 class="sec-title">Sobre nosotros</h1>
-      <span class="sec-note">personas curiosas investigando la flora de Urabá</span>
-    </div>
-    <div class="sec-rule">
-      <svg viewBox="0 0 1200 10" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 5 Q 60 0 120 5 T 240 5 T 360 5 T 480 5 T 600 5 T 720 5 T 840 5 T 960 5 T 1080 5 T 1200 5" fill="none" stroke="#3f7d2f" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
-      </svg>
-    </div>
-
-    <div class="emblem-wrap">
-      <img class="emblem" src="logo.svg" alt="Escudo de Plantas de Urabá">
-    </div>
-
-    <div class="story">
-      <div class="story-photo sketch">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Quince_nursery_%28seedlings_was_grafted%29.jpg/960px-Quince_nursery_%28seedlings_was_grafted%29.jpg" alt="Plántulas jóvenes en un vivero" loading="lazy">
+<main>
+  <section class="py-5">
+    <div class="container">
+      <div class="mb-5">
+        <h1 class="fw-bold mb-1">Sobre nosotros</h1>
+        <p class="text-body-secondary mb-0">personas curiosas investigando la flora de Urabá</p>
       </div>
-      <div>
-        <h2>De Urabá, con curiosidad y en equipo</h2>
-        <p>En <strong>Plantas de Urabá</strong> somos personas curiosas que investigamos las plantas de la región. No vendemos plántulas: documentamos lo que aprendemos de la flora del trópico húmedo antioqueño y lo compartimos abierto.</p>
-        <p>El registro ya reúne <strong id="espCount">100 especies</strong> entre agrícolas, palmas, maderables y flora nativa, y crece a la par de lo que vamos descubriendo junto a la comunidad de Urabá.</p>
-        <ul>
-          <li>Fichas abiertas con nombre científico, usos y fotos reales.</li>
-          <li>Investigación en curso sobre cultivos, sombríos y conservación.</li>
-          <li>Compromiso con visibilizar y cuidar la selva húmeda tropical.</li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- Estadísticas -->
-    <div class="stats">
-      <div class="stat sketch"><b id="statEsp">100</b><span>especies documentadas</span></div>
-      <div class="stat sketch"><b id="statCat">5</b><span>categorías documentadas</span></div>
-      <div class="stat sketch"><b>100%</b><span>investigación abierta</span></div>
-      <div class="stat sketch"><b>Urabá</b><span>corazón del proyecto</span></div>
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-md-5">
+          <img class="story-photo img-fluid rounded-4 shadow-sm" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Quince_nursery_%28seedlings_was_grafted%29.jpg/960px-Quince_nursery_%28seedlings_was_grafted%29.jpg" alt="Plántulas jóvenes en un vivero" loading="lazy">
+        </div>
+        <div class="col-md-7">
+          <h2 class="h3 fw-bold mb-3">De Urabá, con curiosidad y en equipo</h2>
+          <p>En <strong>Plantas de Urabá</strong> somos personas curiosas que investigamos las plantas de la región. No vendemos plántulas: documentamos lo que aprendemos de la flora del trópico húmedo antioqueño y lo compartimos abierto.</p>
+          <p>El registro ya reúne <strong id="espCount">100 especies</strong> entre agrícolas, palmas, maderables y flora nativa, y crece a la par de lo que vamos descubriendo junto a la comunidad de Urabá.</p>
+          <ul class="list-unstyled d-flex flex-column gap-2 mt-4">
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Fichas abiertas con nombre científico, usos y fotos reales.</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Investigación en curso sobre cultivos, sombríos y conservación.</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Compromiso con visibilizar y cuidar la selva húmeda tropical.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row g-4 text-center mb-5">
+        <div class="col-6 col-lg-3">
+          <div class="border rounded-4 p-4 h-100">
+            <div class="display-6 fw-bold text-success" id="statEsp">100</div>
+            <span class="text-body-secondary">especies documentadas</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="border rounded-4 p-4 h-100">
+            <div class="display-6 fw-bold text-success" id="statCat">5</div>
+            <span class="text-body-secondary">categorías documentadas</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="border rounded-4 p-4 h-100">
+            <div class="display-6 fw-bold text-success">100%</div>
+            <span class="text-body-secondary">investigación abierta</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="border rounded-4 p-4 h-100">
+            <div class="display-6 fw-bold text-success">Urabá</div>
+            <span class="text-body-secondary">corazón del proyecto</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-md-7">
+          <h2 class="h3 fw-bold mb-3">Nuestra región</h2>
+          <p>Urabá es una subregión del departamento de Antioquia, en el noroccidente de Colombia, bañada por el golfo de Urabá y surcada por ríos como el Atrato. Su clima cálido y húmedo la convierte en una de las zonas con mayor biodiversidad y potencial agrícola del país.</p>
+          <p>De aquí salen el banano de exportación, el plátano hartón de la mesa colombiana, el cacao de aroma, la palma de aceite y tesoros del bosque como el borojó, el achiote y el bijao.</p>
+          <p class="mb-0">Cada ficha que compartimos es un pedacito del trópico húmedo que nos invita a seguir investigando.</p>
+        </div>
+        <div class="col-md-5">
+          <div class="bg-success text-white rounded-4 p-4 text-center">
+            <p class="h4 fw-bold mb-2">Trópico húmedo<br>ríos, selva y agricultura</p>
+            <p class="mb-0 opacity-75">Urabá · Antioquia — Colombia</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="fw-bold mb-4">Lo que nos mueve</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="border rounded-4 p-4 h-100">
+            <h3 class="h5 fw-bold"><i class="bi bi-lightbulb text-success me-2"></i>Curiosidad</h3>
+            <p class="text-body-secondary mb-0">Investigamos con asombro cada especie y cada historia que hay detrás de la flora de Urabá.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="border rounded-4 p-4 h-100">
+            <h3 class="h5 fw-bold"><i class="bi bi-tree text-success me-2"></i>Conservación</h3>
+            <p class="text-body-secondary mb-0">Promovemos el conocimiento de las especies nativas para proteger la selva húmeda y los sistemas silvopastoriles.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="border rounded-4 p-4 h-100">
+            <h3 class="h5 fw-bold"><i class="bi bi-share text-success me-2"></i>Conocimiento abierto</h3>
+            <p class="text-body-secondary mb-0">Compartimos lo que aprendemos para que la curiosidad no sea de una sola persona: es de todos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-success text-white rounded-4 p-5 text-center my-5">
+        <h2 class="fw-bold mb-2">¿Sabes algo que no esté aquí?</h2>
+        <p class="mb-4">Escríbenos y lo documentamos juntos: la flora de Urabá se investiga en equipo.</p>
+        <a class="btn btn-light btn-lg" href="catalogo.html">Ir al catálogo <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
     </div>
   </section>
-
-  <!-- Región -->
-  <section class="sec">
-    <div class="region">
-      <div class="region-copy">
-        <h2 class="sec-title" style="font-size:34px">Nuestra región</h2>
-        <p>Urabá es una subregión del departamento de Antioquia, en el noroccidente de Colombia, bañada por el golfo de Urabá y surcada por ríos como el Atrato. Su clima cálido y húmedo la convierte en una de las zonas con mayor biodiversidad y potencial agrícola del país.</p>
-        <p>De aquí salen el banano de exportación, el plátano hartón de la mesa colombiana, el cacao de aroma, la palma de aceite y tesoros del bosque como el borojó, el achiote y el bijao.</p>
-        <p>Cada ficha que compartimos es un pedacito del trópico húmedo que nos invita a seguir investigando.</p>
-      </div>
-      <div class="region-badge sketch">
-        <p class="big">Trópico húmedo<br>ríos, selva y agricultura</p>
-        <p class="small">Urabá · Antioquia — Colombia</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Valores -->
-  <section class="sec">
-    <h2 class="sec-title">Lo que nos mueve</h2>
-    <div class="sec-rule">
-      <svg viewBox="0 0 1200 10" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 5 Q 60 0 120 5 T 240 5 T 360 5 T 480 5 T 600 5 T 720 5 T 840 5 T 960 5 T 1080 5 T 1200 5" fill="none" stroke="#3f7d2f" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
-      </svg>
-    </div>
-    <div class="values">
-      <div class="value sketch">
-        <h3>Curiosidad</h3>
-        <p>Investigamos con asombro cada especie y cada historia que hay detrás de la flora de Urabá.</p>
-      </div>
-      <div class="value sketch">
-        <h3>Conservación</h3>
-        <p>Promovemos el conocimiento de las especies nativas para proteger la selva húmeda y los sistemas silvopastoriles.</p>
-      </div>
-      <div class="value sketch">
-        <h3>Conocimiento abierto</h3>
-        <p>Compartimos lo que aprendemos para que la curiosidad no sea de una sola persona: es de todos.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-banner sketch">
-    <h2>¿Sabes algo que no esté aquí?</h2>
-    <p>Escríbenos y lo documentamos juntos: la flora de Urabá se investiga en equipo.</p>
-    <a class="btn" href="catalogo.html">Ir al catálogo <span class="arr">→</span></a>
-  </section>
-
 </main>
 
-<footer class="site-foot">
-  <div class="wrap">
-    <div class="foot-inner">
-      <div>
-        <h4 class="foot-h">Plantas de Urabá</h4>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M12 13 C7 20 7 21 12 21 C17 21 17 20 12 13"/></svg>
-          <span>Urabá, Antioquia — Colombia</span>
-        </div>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
-          <span>hola@plantasdeuraba.co</span>
-        </div>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 C6 3 5 4 5 5 C5 13 11 19 19 19 C20 19 21 18 21 17 L17 14 L15 16 C13 15 9 11 8 9 L10 7 L7 3 Z"/></svg>
-          <span>+57 300 000 0000</span>
-        </div>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C7 3 3 7 3 12 C3 14 3.8 15.8 5 17.2 L4 21 L7.8 20 C9.2 21.2 11 22 12 22 C17 22 21 18 21 12 C21 7 17 3 12 3 Z"/><path d="M9 9.5 C9.2 10.6 10 12 11 13 C12 14 13.4 14.8 14.5 15 L15.5 13.5 L13.5 12 L12.5 13 C11.8 12.5 11.5 12.2 11 11.5 L12 10.5 L10.5 8.5 L9 9.5 Z"/></svg>
-          <span>WhatsApp: +57 311 000 0000</span>
-        </div>
+<footer class="bg-dark text-white-50 pt-5 pb-4 mt-4">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Plantas de Urabá</h5>
+        <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-geo-alt-fill text-success"></i><span>Urabá, Antioquia — Colombia</span></li>
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-envelope-fill text-success"></i><span>hola@plantasdeuraba.co</span></li>
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-telephone-fill text-success"></i><span>+57 300 000 0000</span></li>
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-whatsapp text-success"></i><span>+57 311 000 0000</span></li>
+        </ul>
       </div>
-      <div>
-        <h4 class="foot-h">Colabora</h4>
-        <div class="foot-line"><span>¿Viste un dato erróneo<br>o conoces otra especie?</span></div>
-        <div class="foot-line"><span>Escríbenos y lo corregimos juntos.</span></div>
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Colabora</h5>
+        <p class="mb-1">¿Viste un dato erróneo o conoces otra especie?</p>
+        <p class="mb-0">Escríbenos y lo corregimos juntos.</p>
       </div>
-      <div>
-        <h4 class="foot-h">Síguenos</h4>
-        <div class="socials">
-          <a href="#" aria-label="Instagram" title="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="#2b2b2b" stroke="none"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 H13 C10.8 4 9 5.8 9 8 V11 H6 V14 H9 V20 H12 V14 H15 Z"/></svg>
-          </a>
-          <a href="#" aria-label="YouTube" title="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5 L15 12 L10.5 14.5 Z"/></svg>
-          </a>
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Síguenos</h5>
+        <div class="d-flex gap-2">
+          <a class="btn btn-outline-light rounded-circle" href="#" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a class="btn btn-outline-light rounded-circle" href="#" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a class="btn btn-outline-light rounded-circle" href="#" aria-label="YouTube" title="YouTube"><i class="bi bi-youtube"></i></a>
         </div>
       </div>
     </div>
-    <div class="credit">
-      © 2026 Plantas de Urabá · fotos: <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> · hecho a mano, en la web
+    <div class="border-top border-secondary pt-3 text-center small">
+      © 2026 Plantas de Urabá · fotos: <a class="link-success" href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>
     </div>
   </div>
 </footer>
 
 <script src="datos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 (function () {
-  var D = window.DATOS;
-  document.getElementById("espCount").textContent = D.categorias.reduce(function (n, c) { return n + c.plantas.length; }, 0) + " especies";
-  document.getElementById("statEsp").textContent = D.categorias.reduce(function (n, c) { return n + c.plantas.length; }, 0);
+  var D = window.DATOS, U = window.UI;
+  document.getElementById("espCount").textContent = U.totalEspecies() + " especies";
+  document.getElementById("statEsp").textContent = U.totalEspecies();
   document.getElementById("statCat").textContent = D.categorias.length;
-  window.UI.initImgFallback();
+  U.initImgFallback();
 })();
 </script>
 </body>

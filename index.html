@@ -3,160 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plantas de Urabá · Vivero del trópico húmedo</title>
+<title>Plantas de Urabá · Investigación de la flora del trópico húmedo</title>
 <meta name="description" content="Plantas de Urabá: personas curiosas investigando y documentando la flora de Urabá, Antioquia - Colombia.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/svg+xml" href="software/logo.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="software/estilos.css">
-  <link rel="icon" type="image/svg+xml" href="software/logo.svg">
 </head>
 <body>
 
-<header class="site-head">
-  <div class="wrap head-inner">
-    <a class="brand" href="index.html" aria-label="Plantas de Urabá - Inicio">
-      <img class="brand-logo" src="software/logo.svg" alt="Logo de Plantas de Urabá">
-      <span>
-        <span class="brand-name">Plantas de Urabá</span><br>
-        <span class="brand-region">Urabá · Antioquia, Colombia</span>
+<nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="Plantas de Urabá - Inicio">
+      <img class="rounded-circle border" src="software/logo.svg" alt="Logo de Plantas de Urabá" width="44" height="44">
+      <span class="lh-1">
+        <span class="fw-bold fs-5 d-block">Plantas de Urabá</span>
+        <small class="text-body-secondary">Urabá · Antioquia, Colombia</small>
       </span>
     </a>
-    <nav class="nav" aria-label="Navegación principal">
-      <a class="nav-link active" href="index.html">Inicio</a>
-      <a class="nav-link" href="software/catalogo.html">Catálogo</a>
-      <a class="nav-link" href="software/sobre-nosotros.html">Sobre Nosotros</a>
-      <a class="nav-cta" href="software/catalogo.html">Ver Catálogo</a>
-    </nav>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPrincipal" aria-controls="navPrincipal" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navPrincipal">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="software/catalogo.html">Catálogo</a></li>
+        <li class="nav-item"><a class="nav-link" href="software/sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li class="nav-item mt-2 mt-lg-0 ms-lg-2"><a class="btn btn-success btn-sm px-3" href="software/catalogo.html">Ver Catálogo</a></li>
+      </ul>
+    </div>
   </div>
-</header>
+</nav>
 
-<main class="wrap">
+<main>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero position-relative overflow-hidden">
     <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Apartad%C3%B3_bananeras.jpg" alt="Cultivo de banano en Apartadó, Urabá" loading="eager">
     <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="hero-pill">Investigación abierta · flora del trópico húmedo</span>
-      <h1>La flora de Urabá, investigada con curiosidad</h1>
-      <p class="sub">Somos personas curiosas y estamos investigando la flora de Urabá: especies agrícolas, palmas, maderables y flora nativa de la región. Cada ficha es un registro abierto de lo que aprendemos.</p>
-      <div class="hero-cta">
-        <a class="btn" href="software/catalogo.html">Ver Catálogo Completo <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="software/sobre-nosotros.html">Conócenos</a>
+    <div class="container hero-content position-relative">
+      <div class="col-lg-6">
+        <span class="badge rounded-pill text-bg-light border px-3 py-2 mb-3">Investigación abierta · flora del trópico húmedo</span>
+        <h1 class="display-4 fw-bold mb-3">La flora de Urabá, investigada con curiosidad</h1>
+        <p class="lead text-body-secondary mb-4">Somos personas curiosas y estamos investigando la flora de Urabá: especies agrícolas, palmas, maderables y flora nativa de la región. Cada ficha es un registro abierto de lo que aprendemos.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a class="btn btn-success btn-lg" href="software/catalogo.html">Ver Catálogo Completo <i class="bi bi-arrow-right ms-1"></i></a>
+          <a class="btn btn-outline-success btn-lg" href="software/sobre-nosotros.html">Conócenos</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CATEGORÍAS -->
-  <section class="sec" id="categorias">
-    <div class="sec-head">
-      <h2 class="sec-title">Lo que investigamos</h2>
-      <span class="sec-note">5 categorías · 100 especies de la región</span>
+  <section class="py-5">
+    <div class="container">
+      <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-4">
+        <h2 class="fw-bold mb-0">Lo que investigamos</h2>
+        <span class="text-body-secondary">5 categorías · 100 especies de la región</span>
+      </div>
+      <div class="row g-4" id="catGrid"></div>
     </div>
-    <div class="sec-rule">
-      <svg viewBox="0 0 1200 10" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 5 Q 60 0 120 5 T 240 5 T 360 5 T 480 5 T 600 5 T 720 5 T 840 5 T 960 5 T 1080 5 T 1200 5" fill="none" stroke="#3f7d2f" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
-      </svg>
-    </div>
-    <div class="cat-grid" id="catGrid"></div>
   </section>
 
   <!-- ESPECIES DESTACADAS -->
-  <section class="sec">
-    <div class="sec-head">
-      <h2 class="sec-title">Especies destacadas</h2>
-      <span class="sec-note">fotos reales · Wikimedia Commons</span>
+  <section class="pb-5 pt-2">
+    <div class="container">
+      <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-4">
+        <h2 class="fw-bold mb-0">Especies destacadas</h2>
+        <span class="text-body-secondary">fotos reales · Wikimedia Commons</span>
+      </div>
+      <div class="row g-4" id="featuredGrid"></div>
+      <p class="text-center mt-4">
+        <a class="btn btn-success btn-lg" href="software/catalogo.html">Explorar el catálogo completo <i class="bi bi-arrow-right ms-1"></i></a>
+      </p>
     </div>
-    <div class="sec-rule">
-      <svg viewBox="0 0 1200 10" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 5 Q 60 0 120 5 T 240 5 T 360 5 T 480 5 T 600 5 T 720 5 T 840 5 T 960 5 T 1080 5 T 1200 5" fill="none" stroke="#3f7d2f" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
-      </svg>
-    </div>
-    <div class="plants-grid" id="featuredGrid"></div>
-    <p style="text-align:center;margin-top:26px">
-      <a class="btn btn-green" href="software/catalogo.html">Explorar el catálogo completo <span class="arr">→</span></a>
-    </p>
   </section>
 
   <!-- CTA -->
-  <section class="cta-banner sketch">
-    <h2>¿Te enamoró alguna especie?</h2>
-    <p>Investiga con nosotros: cada ficha es un registro abierto de la flora de Urabá.</p>
-    <a class="btn" href="software/catalogo.html">Explorar el catálogo <span class="arr">→</span></a>
+  <section class="pb-5">
+    <div class="container">
+      <div class="bg-success text-white rounded-4 p-5 text-center">
+        <h2 class="fw-bold mb-2">¿Te enamoró alguna especie?</h2>
+        <p class="mb-4">Investiga con nosotros: cada ficha es un registro abierto de la flora de Urabá.</p>
+        <a class="btn btn-light btn-lg" href="software/catalogo.html">Explorar el catálogo <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
+    </div>
   </section>
 
 </main>
 
-<footer class="site-foot">
-  <div class="wrap">
-    <div class="foot-inner">
-      <div>
-        <h4 class="foot-h">Plantas de Urabá</h4>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M12 13 C7 20 7 21 12 21 C17 21 17 20 12 13"/></svg>
-          <span>Urabá, Antioquia — Colombia</span>
-        </div>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
-          <span>hola@plantasdeuraba.co</span>
-        </div>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 C6 3 5 4 5 5 C5 13 11 19 19 19 C20 19 21 18 21 17 L17 14 L15 16 C13 15 9 11 8 9 L10 7 L7 3 Z"/></svg>
-          <span>+57 300 000 0000</span>
-        </div>
-        <div class="foot-line">
-          <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C7 3 3 7 3 12 C3 14 3.8 15.8 5 17.2 L4 21 L7.8 20 C9.2 21.2 11 22 12 22 C17 22 21 18 21 12 C21 7 17 3 12 3 Z"/><path d="M9 9.5 C9.2 10.6 10 12 11 13 C12 14 13.4 14.8 14.5 15 L15.5 13.5 L13.5 12 L12.5 13 C11.8 12.5 11.5 12.2 11 11.5 L12 10.5 L10.5 8.5 L9 9.5 Z"/></svg>
-          <span>WhatsApp: +57 311 000 0000</span>
-        </div>
+<footer class="bg-dark text-white-50 pt-5 pb-4 mt-4">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Plantas de Urabá</h5>
+        <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-geo-alt-fill text-success"></i><span>Urabá, Antioquia — Colombia</span></li>
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-envelope-fill text-success"></i><span>hola@plantasdeuraba.co</span></li>
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-telephone-fill text-success"></i><span>+57 300 000 0000</span></li>
+          <li class="d-flex gap-2 align-items-center"><i class="bi bi-whatsapp text-success"></i><span>+57 311 000 0000</span></li>
+        </ul>
       </div>
-      <div>
-        <h4 class="foot-h">Colabora</h4>
-        <div class="foot-line"><span>¿Viste un dato erróneo<br>o conoces otra especie?</span></div>
-        <div class="foot-line"><span>Escríbenos y lo corregimos juntos.</span></div>
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Colabora</h5>
+        <p class="mb-1">¿Viste un dato erróneo o conoces otra especie?</p>
+        <p class="mb-0">Escríbenos y lo corregimos juntos.</p>
       </div>
-      <div>
-        <h4 class="foot-h">Síguenos</h4>
-        <div class="socials">
-          <a href="#" aria-label="Instagram" title="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="#2b2b2b" stroke="none"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 H13 C10.8 4 9 5.8 9 8 V11 H6 V14 H9 V20 H12 V14 H15 Z"/></svg>
-          </a>
-          <a href="#" aria-label="YouTube" title="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5 L15 12 L10.5 14.5 Z"/></svg>
-          </a>
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Síguenos</h5>
+        <div class="d-flex gap-2">
+          <a class="btn btn-outline-light rounded-circle" href="#" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a class="btn btn-outline-light rounded-circle" href="#" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a class="btn btn-outline-light rounded-circle" href="#" aria-label="YouTube" title="YouTube"><i class="bi bi-youtube"></i></a>
         </div>
       </div>
     </div>
-    <div class="credit">
-      © 2026 Plantas de Urabá · fotos: <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> · hecho a mano, en la web
+    <div class="border-top border-secondary pt-3 text-center small">
+      © 2026 Plantas de Urabá · fotos: <a class="link-success" href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>
     </div>
   </div>
 </footer>
 
 <script src="software/datos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 (function () {
   var D = window.DATOS, U = window.UI;
+  U.base = "software/";
 
-  // Categorías
   var catGrid = document.getElementById("catGrid");
   D.categorias.forEach(function (c) {
-    catGrid.insertAdjacentHTML("beforeend", U.catCard(c));
+    catGrid.insertAdjacentHTML("beforeend", '<div class="col-sm-6 col-lg-4 col-xl-3">' + U.catCard(c) + '</div>');
   });
 
-  // Destacadas
   var feat = document.getElementById("featuredGrid");
   D.destacadas.forEach(function (id) {
     var p = U.porId(id);
-    if (p) feat.insertAdjacentHTML("beforeend", U.plantCard(p));
+    if (p) feat.insertAdjacentHTML("beforeend", '<div class="col-sm-6 col-lg-3">' + U.plantCard(p) + '</div>');
   });
 
-  // Cards -> catálogo
   document.querySelectorAll("#featuredGrid .plant-card").forEach(function (card) {
     card.addEventListener("click", function () {
-      window.location.href = "catalogo.html#planta-" + card.dataset.id;
+      window.location.href = "software/catalogo.html#planta-" + card.dataset.id;
     });
   });
 
