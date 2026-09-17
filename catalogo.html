@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catálogo · Plantas de Urabá</title>
-<meta name="description" content="Catálogo completo del vivero Plantas de Urabá: agrícolas, palmas, maderables y especies nativas.">
+<meta name="description" content="Registro abierto del proyecto Plantas de Urabá: especies agrícolas, palmas, maderables y nativas investigadas por personas curiosas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="estilos.css">
@@ -37,7 +37,7 @@
       <h1 class="sec-title">Catálogo de especies</h1>
       <span class="sec-note" id="totalNote">cargando…</span>
     </div>
-    <p style="font-size:18px;color:var(--ink-soft);margin:4px 0 0">Todas nuestras plantas se cultivan en el vivero y se entregan listas para sembrar. Haz clic en una tarjeta para ver el detalle.</p>
+    <p style="font-size:18px;color:var(--ink-soft);margin:4px 0 0">Cada tarjeta documenta lo que investigamos: nombre científico, usos y fotos reales. Haz clic en una tarjeta para ver el detalle.</p>
 
     <div class="chips" id="chips" role="tablist" aria-label="Filtrar por categoría">
       <button class="chip active" data-filter="todos" role="tab">Todos</button>
@@ -59,7 +59,7 @@
       <p class="sci" id="modalSci"></p>
       <p class="desc" id="modalDesc"></p>
       <div class="modal-actions">
-        <a class="btn btn-green" id="modalWa" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        <a class="btn btn-green" id="modalWa" href="#" target="_blank" rel="noopener">¿Sabes más? Escríbenos</a>
         <button class="btn btn-ghost" id="modalClose2">Cerrar</button>
       </div>
       <p class="modal-cat" id="modalCat"></p>
@@ -90,9 +90,9 @@
         </div>
       </div>
       <div>
-        <h4 class="foot-h">Horario</h4>
-        <div class="foot-line"><span>Lunes a sábado<br>8:00 am — 5:00 pm</span></div>
-        <div class="foot-line"><span>Visitas guiadas por reserva</span></div>
+        <h4 class="foot-h">Colabora</h4>
+        <div class="foot-line"><span>¿Viste un dato erróneo<br>o conoces otra especie?</span></div>
+        <div class="foot-line"><span>Escríbenos y lo corregimos juntos.</span></div>
       </div>
       <div>
         <h4 class="foot-h">Síguenos</h4>
@@ -182,7 +182,7 @@
     modalDesc.textContent = p.descripcion;
     modalCat.textContent = "Categoría: " + p.categoria.nombre;
     modalWa.href = "https://wa.me/" + D.contacto.whatsapp.replace(/\D/g, "") +
-      "?text=" + encodeURIComponent("Hola, me interesa la especie " + p.nombre_comun + " del vivero " + D.vivero + ".");
+      "?text=" + encodeURIComponent("Hola, investigo las plantas de Urabá. Quiero aportar o preguntar sobre " + p.nombre_comun + " del registro " + D.vivero + ".");
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
   }
