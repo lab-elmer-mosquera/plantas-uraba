@@ -1,0 +1,97 @@
+.btn {
+  --_c: var(--color-primary);
+  --_c-hover: var(--color-primary-hover);
+  --_fg: var(--color-text-on-primary);
+
+  min-height: 42px;
+  padding: .68rem 1rem;
+  border: 1px solid var(--_c);
+  border-radius: var(--radius-pill);
+  background: var(--_c);
+  color: var(--_fg);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--_c-hover);
+  border-color: var(--_c-hover);
+  transform: translateY(-1px);
+}
+
+.btn--secondary {
+  --_c: var(--color-secondary);
+  --_c-hover: color-mix(in srgb, var(--color-secondary) 82%, var(--color-text));
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--_c);
+}
+
+.btn--outline:hover:not(:disabled) {
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text-muted);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--link {
+  min-height: auto;
+  padding-inline: 0;
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-primary);
+}
+
+.btn--link:hover:not(:disabled) {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-primary-hover);
+  transform: none;
+}
+
+.btn--icon {
+  width: 42px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+}
+
+.btn:disabled {
+  background: var(--color-disabled-bg);
+  border-color: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
+
+.btn-group {
+  display: inline-flex;
+}
+
+.btn-group .btn {
+  border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+}
+
+.btn-group .btn:last-child {
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+}

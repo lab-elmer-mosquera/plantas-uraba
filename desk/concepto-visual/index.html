@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Herbario Vivo · Sistema visual</title>
+
+  <script>
+    (() => {
+      const saved = localStorage.getItem("herbario-theme");
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (systemDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens-light.css">
+  <link rel="stylesheet" href="css/tokens-dark.css">
+  <link rel="stylesheet" href="css/tokens-shared.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/feedback.css">
+  <link rel="stylesheet" href="css/surfaces.css">
+  <link rel="stylesheet" href="css/navs.css">
+  <link rel="stylesheet" href="css/botanical.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="#" aria-label="Herbario Vivo, inicio">
+      <span class="brand__mark" aria-hidden="true">❧</span>
+      <span>Plántas Uraba</span>
+    </a>
+
+    <nav class="navbar__links" aria-label="Principal">
+      <a class="nav-link" href="#" aria-current="page">Inicio</a>
+      <a class="nav-link" href="#">Catálogo</a>
+      <a class="nav-link" href="#">Guías de cuidado</a>
+      <a class="nav-link" href="#">Mi jardín</a>
+      <a class="nav-link" href="#">Diario</a>
+    </nav>
+
+    <button class="btn btn--ghost btn--icon" id="themeToggle" aria-label="Cambiar tema">◐</button>
+  </header>
+
+  <main class="catalog">
+    <section class="hero-demo">
+      <div class="hero-demo__copy">
+        <span class="eyebrow">HERBARIO DIGITAL</span>
+        <h1>Cultiva tu <em>jardín interior</em>.</h1>
+        <p>Una aplicación moderna presentada como una colección botánica viva.</p>
+
+        <form class="search" role="search">
+          <span aria-hidden="true">⌕</span>
+          <input class="control" type="search" placeholder="¿Qué planta buscas?" aria-label="Buscar planta">
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+
+        <div class="filters" aria-label="Filtros rápidos">
+          <button class="chip" aria-pressed="true">☼ Luz</button>
+          <button class="chip" aria-pressed="false">◉ Riego</button>
+          <button class="chip" aria-pressed="false">♧ Espacio</button>
+          <button class="chip" aria-pressed="false">▥ Dificultad</button>
+        </div>
+      </div>
+
+      <div class="specimen specimen--hero" aria-label="Ilustración botánica decorativa">
+        <div class="specimen__paper">
+          <div class="specimen__plant">🌿</div>
+          <span class="specimen__label">Monstera deliciosa</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">SUPERFICIES</span>
+          <h2>Fichas botánicas</h2>
+        </div>
+        <a class="nav-link" href="#">Ver catálogo →</a>
+      </div>
+
+      <div class="grid grid--cards">
+        <article class="card botanical-card">
+          <div class="card__media botanical-card__media">
+            <span class="badge badge--neutral">Interior</span>
+            <div class="botanical-card__plant">🌿</div>
+          </div>
+          <div class="card__body">
+            <h3>Monstera deliciosa</h3>
+            <p class="latin">Monstera deliciosa</p>
+            <div class="meta-row">
+              <span>☼ Luz indirecta</span>
+              <span>◉ 7–10 días</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card botanical-card">
+          <div class="card__media botanical-card__media">
+            <span class="badge badge--success">Fácil</span>
+            <div class="botanical-card__plant">🪻</div>
+          </div>
+          <div class="card__body">
+            <h3>Lavanda</h3>
+            <p class="latin">Lavandula angustifolia</p>
+            <div class="meta-row">
+              <span>☼ Sol</span>
+              <span>◉ Moderado</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card botanical-card">
+          <div class="card__media botanical-card__media">
+            <span class="badge badge--info">Pet-friendly</span>
+            <div class="botanical-card__plant">🌱</div>
+          </div>
+          <div class="card__body">
+            <h3>Poto</h3>
+            <p class="latin">Epipremnum aureum</p>
+            <div class="meta-row">
+              <span>☼ Media</span>
+              <span>◉ Semanal</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="showcase showcase--split">
+      <div>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">ACCIONES</span>
+            <h2>Botones</h2>
+          </div>
+        </div>
+
+        <div class="component-stack">
+          <button class="btn">Primario</button>
+          <button class="btn btn--secondary">Secundario</button>
+          <button class="btn btn--outline">Outline</button>
+          <button class="btn btn--ghost">Ghost</button>
+          <button class="btn btn--link">Link →</button>
+          <button class="btn" disabled>Deshabilitado</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">FORMULARIOS</span>
+            <h2>Campos</h2>
+          </div>
+        </div>
+
+        <div class="component-stack">
+          <label class="field">
+            <span class="label">Nombre de la planta</span>
+            <input class="control" placeholder="Ej. Monstera">
+            <span class="hint">Usa el nombre común o científico.</span>
+          </label>
+
+          <label class="field">
+            <span class="label">Frecuencia de riego</span>
+            <select class="control">
+              <option>Semanal</option>
+              <option>Cada 10 días</option>
+              <option>Quincenal</option>
+            </select>
+          </label>
+
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="switch__track"></span>
+            <span>Recordatorios de cuidado</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">ESTADO</span>
+          <h2>Badges y alertas</h2>
+        </div>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge badge--neutral">Interior</span>
+        <span class="badge badge--success">Feliz</span>
+        <span class="badge badge--warning">Necesita agua</span>
+        <span class="badge badge--danger">Problema</span>
+        <span class="badge badge--info">Pet-friendly</span>
+      </div>
+
+      <div class="alerts">
+        <div class="alert alert--success">
+          <strong class="alert__title">Todo al día</strong>
+          <span class="alert__body">No tienes cuidados pendientes.</span>
+        </div>
+        <div class="alert alert--warning">
+          <strong class="alert__title">Próximo riego</strong>
+          <span class="alert__body">Tu Monstera necesitará agua mañana.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">DATOS</span>
+          <h2>Tabla de cuidados</h2>
+        </div>
+      </div>
+
+      <div class="table-wrap card">
+        <table class="table table--hover">
+          <thead>
+            <tr>
+              <th>Planta</th>
+              <th>Riego</th>
+              <th>Estado</th>
+              <th class="num">Próximo cuidado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monstera</td>
+              <td>7–10 días</td>
+              <td><span class="badge badge--success">Feliz</span></td>
+              <td class="num">2 días</td>
+            </tr>
+            <tr>
+              <td>Poto</td>
+              <td>7 días</td>
+              <td><span class="badge badge--warning">Necesita luz</span></td>
+              <td class="num">Hoy</td>
+            </tr>
+            <tr>
+              <td>Lavanda</td>
+              <td>6 días</td>
+              <td><span class="badge badge--success">Feliz</span></td>
+              <td class="num">4 días</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="showcase">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">NAVEGACIÓN</span>
+          <h2>Tabs, breadcrumb y paginación</h2>
+        </div>
+      </div>
+
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="#">Inicio</a><span>/</span><a href="#">Catálogo</a><span>/</span><span aria-current="page">Monstera</span>
+      </nav>
+
+      <nav class="tabs" aria-label="Secciones de ficha">
+        <a class="nav-link" aria-current="page" href="#">General</a>
+        <a class="nav-link" href="#">Cuidados</a>
+        <a class="nav-link" href="#">Diario</a>
+      </nav>
+
+      <nav class="pagination" aria-label="Paginación">
+        <a class="nav-link" href="#">‹</a>
+        <a class="nav-link" aria-current="page" href="#">1</a>
+        <a class="nav-link" href="#">2</a>
+        <a class="nav-link" href="#">3</a>
+        <a class="nav-link" href="#">›</a>
+      </nav>
+    </section>
+  </main>
+
+  <script>
+    const themeToggle = document.querySelector("#themeToggle");
+    themeToggle.addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem("herbario-theme", next);
+    });
+
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        chip.setAttribute("aria-pressed", String(chip.getAttribute("aria-pressed") !== "true"));
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+.catalog {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+  padding-block: var(--space-7);
+}
+
+.hero-demo {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding-block: var(--space-7);
+}
+
+.hero-demo__copy p {
+  max-width: 52ch;
+  font-size: var(--fs-lg);
+}
+
+.hero-demo__copy .search {
+  margin-top: var(--space-6);
+}
+
+.hero-demo__copy .filters {
+  margin-top: var(--space-4);
+}
+
+.showcase {
+  padding-block: var(--space-7);
+  border-top: 1px solid var(--color-border);
+}
+
+.showcase--split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-7);
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.section-head h2 {
+  margin: .3rem 0 0;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.grid--cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.component-stack {
+  display: grid;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.component-stack > .btn {
+  justify-self: start;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.alerts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.showcase > .breadcrumb,
+.showcase > .tabs,
+.showcase > .pagination {
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 960px) {
+  .hero-demo,
+  .showcase--split {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-demo {
+    min-height: auto;
+  }
+
+  .grid--cards,
+  .alerts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog {
+    width: min(100% - 1.25rem, var(--container));
+  }
+
+  .grid--cards,
+  .alerts {
+    grid-template-columns: 1fr;
+  }
+
+  .section-head {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .search {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .search .btn {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}

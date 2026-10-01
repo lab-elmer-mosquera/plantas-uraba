@@ -1,0 +1,120 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: 68px;
+  padding: .85rem max(1rem, calc((100vw - var(--container)) / 2));
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.brand__mark {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin-left: auto;
+}
+
+.nav-link {
+  position: relative;
+  color: var(--color-text-muted);
+  transition: color var(--transition), background var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+}
+
+.navbar .nav-link[aria-current="page"]::after,
+.tabs .nav-link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.45rem;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.tabs,
+.pills,
+.pagination,
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.tabs {
+  padding-bottom: .8rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pills .nav-link,
+.pagination .nav-link {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  min-height: 34px;
+  padding: .35rem .65rem;
+  border-radius: var(--radius-pill);
+}
+
+.pagination .nav-link[aria-current="page"] {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.breadcrumb {
+  color: var(--color-text-subtle);
+  font-size: var(--fs-sm);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--color-text);
+}
+
+.nav-vertical {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.nav-vertical .nav-link {
+  padding: .65rem .8rem;
+  border-radius: var(--radius-sm);
+}
+
+.nav-vertical .nav-link[aria-current="page"] {
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+}
+
+@media (max-width: 800px) {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar .btn--icon {
+    margin-left: auto;
+  }
+}
