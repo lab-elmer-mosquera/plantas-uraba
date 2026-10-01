@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantas de Urabá · Exhibition</title>
+<meta name="description" content="Full-screen presentation of the flora of Urabá, Antioquia - Colombia.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #4cc38a;
+    --verde-osc: #0d2a20;
+    --verde-prof: #071410;
+    --crema: #f4efe4;
+    --arena: #e8dcc4;
+    --dorado: #f2c14e;
+    --rojo: #e06a5a;
+    --display: "Fraunces", Georgia, "Times New Roman", serif;
+    --texto: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--verde-prof);
+    color: var(--crema);
+    font-family: var(--texto);
+    overflow: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(1100px 700px at 12% 0%, rgba(76,195,138,.18), transparent 60%),
+      radial-gradient(900px 700px at 100% 100%, rgba(242,193,78,.10), transparent 60%),
+      linear-gradient(160deg, #0b2019 0%, #071410 55%, #050f0c 100%);
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(244,239,228,.045) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: .5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #escena {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: grid;
+    place-items: stretch;
+  }
+
+  .diapo {
+    grid-area: 1 / 1;
+    display: none;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+
+  .diapo.activa { display: grid; opacity: 1; transform: none; }
+
+  .diapo.entra { animation: entra .5s ease forwards; }
+  .diapo.sale { animation: sale .5s ease forwards; }
+
+  @keyframes entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes sale { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-14px); } }
+
+  .marco {
+    width: min(1500px, 92vw);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vh, 4.5rem) 0;
+    align-self: center;
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: clamp(.7rem, 1vw, .85rem);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--verde);
+    font-weight: 600;
+  }
+
+  .kicker::before {
+    content: "";
+    width: 2.2rem;
+    height: 1px;
+    background: var(--verde);
+    opacity: .6;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    line-height: .95;
+    letter-spacing: -.02em;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -.015em;
+  }
+
+  .cientifico {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--verde);
+  }
+
+  .pildora {
+    display: inline-block;
+    padding: .45rem 1rem;
+    border: 1px solid rgba(76,195,138,.45);
+    border-radius: 999px;
+    font-size: clamp(.7rem, 1vw, .82rem);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--verde);
+    background: rgba(76,195,138,.08);
+  }
+
+  .dato {
+    border-left: 2px solid var(--dorado);
+    padding: .2rem 0 .2rem 1.1rem;
+    color: var(--arena);
+    font-weight: 300;
+  }
+
+  .portada { place-items: center; text-align: center; }
+  .portada .marco { max-width: 1100px; }
+  .portada h1 { font-size: clamp(3rem, 10vw, 8rem); margin: 1.2rem 0 1rem; }
+  .portada .bajada { font-size: clamp(1rem, 2.1vw, 1.5rem); font-weight: 300; color: var(--arena); max-width: 46ch; margin: 0 auto; }
+  .portada .cifras { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.6rem; }
+  .cifra { border-top: 1px solid rgba(244,239,228,.2); padding-top: .8rem; min-width: 8.5rem; }
+  .cifra b { display: block; font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; color: var(--verde); }
+  .cifra span { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--arena); }
+
+  .dos-col { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .rejilla-especie { display: grid; grid-template-columns: 1fr 1fr; }
+
+  .especie h2 { font-size: clamp(2.4rem, 6.4vw, 5.4rem); margin: .8rem 0 .4rem; }
+  .especie .uso { margin: 1.5rem 0 1.4rem; }
+  .especie .texto { font-size: clamp(1rem, 1.7vw, 1.35rem); font-weight: 300; line-height: 1.6; color: var(--arena); max-width: 42ch; }
+
+  .marco-foto {
+    position: relative;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 2rem 5rem rgba(0,0,0,.5);
+    background: linear-gradient(150deg, #14362a, #0a1d16);
+  }
+
+  .marco-foto img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 1; }
+  .marco-foto img.fallida { display: none; }
+  .marco-foto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(244,239,228,.14);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .marco-foto.ancha { aspect-ratio: 16 / 10; }
+  .rejilla-especie .marco-foto { aspect-ratio: 3 / 4; }
+
+  .letra {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--display);
+    font-size: clamp(6rem, 18vw, 14rem);
+    font-weight: 800;
+    color: rgba(76,195,138,.28);
+  }
+
+  .seccion h2 { font-size: clamp(2.6rem, 7.5vw, 6.5rem); }
+  .seccion .entrada { font-size: clamp(1rem, 1.9vw, 1.45rem); font-weight: 300; color: var(--arena); max-width: 52ch; margin-top: 1.2rem; line-height: 1.6; }
+
+  .marcador-cat { align-items: center; }
+  .marcador-cat .marco { max-width: 1200px; }
+  .marcador-cat h2 { font-size: clamp(2.2rem, 6.5vw, 5.2rem); }
+  .marcador-cat .cuenta { font-family: var(--display); font-size: clamp(3rem, 9vw, 7rem); color: rgba(76,195,138,.25); font-weight: 800; }
+
+  .rejilla-cat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 2.4rem; }
+  .tarjeta-cat { border: 1px solid rgba(244,239,228,.14); border-radius: .9rem; padding: 1.3rem 1.2rem; background: rgba(244,239,228,.03); }
+  .tarjeta-cat b { display: block; font-family: var(--display); font-size: 1.2rem; font-weight: 600; margin-bottom: .35rem; }
+  .tarjeta-cat span { font-size: .85rem; font-weight: 300; color: var(--arena); line-height: 1.5; display: block; }
+  .tarjeta-cat em { display: block; margin-top: .7rem; font-style: normal; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--verde); }
+
+  .cierre { place-items: center; text-align: center; }
+  .cierre .marco { max-width: 900px; }
+  .cierre h2 { font-size: clamp(2.2rem, 6vw, 4.6rem); }
+  .cierre p { font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 300; color: var(--arena); margin: 1.2rem auto 0; max-width: 44ch; line-height: 1.6; }
+  .contacto { display: flex; flex-wrap: wrap; gap: .8rem 2rem; justify-content: center; margin-top: 2.4rem; font-size: .95rem; }
+  .contacto a { color: var(--verde); text-decoration: none; border-bottom: 1px solid rgba(76,195,138,.35); }
+
+  .barra {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: rgba(244,239,228,.1);
+    z-index: 5;
+  }
+  .barra i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--verde), var(--dorado)); transition: width .4s ease; }
+
+  .pie {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 4;
+    padding: .9rem clamp(1rem, 3vw, 2.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(244,239,228,.5);
+    pointer-events: none;
+  }
+  .pie .marca { display: flex; align-items: center; gap: .55rem; }
+  .pie .punto { width: .5rem; height: .5rem; border-radius: 50%; background: var(--verde); box-shadow: 0 0 .6rem var(--verde); }
+  .pie .conteo b { color: var(--crema); font-weight: 600; }
+
+  .flechas { position: fixed; top: 50%; transform: translateY(-50%); z-index: 4; }
+  .flechas button {
+    width: 3.1rem; height: 3.1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(244,239,228,.2);
+    background: rgba(7,20,16,.55);
+    color: var(--crema);
+    font-size: 1.1rem;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .flechas button:hover { background: rgba(76,195,138,.22); border-color: var(--verde); }
+  .flechas button:disabled { opacity: .22; cursor: default; }
+  #ant { left: clamp(.5rem, 2vw, 1.6rem); }
+  #sig { right: clamp(.5rem, 2vw, 1.6rem); }
+
+  .ayuda {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: none;
+    place-items: center;
+    background: rgba(5,15,12,.92);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+  }
+  .ayuda.abierta { display: grid; }
+  .ayuda div { border: 1px solid rgba(244,239,228,.18); border-radius: 1rem; padding: 2rem 2.4rem; max-width: 520px; }
+  .ayuda h3 { font-family: var(--display); font-size: 1.6rem; font-weight: 600; margin-bottom: 1.1rem; }
+  .ayuda dl { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1.1rem; font-size: .9rem; }
+  .ayuda dt { color: var(--verde); font-family: var(--display); }
+  .ayuda dd { color: var(--arena); font-weight: 300; }
+  .ayuda p { margin-top: 1.3rem; font-size: .78rem; color: rgba(244,239,228,.45); }
+
+  .indice {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    display: none;
+    grid-template-rows: auto 1fr;
+    gap: 1.2rem;
+    padding: clamp(1.2rem, 3vw, 2.4rem);
+    background: rgba(5,15,12,.96);
+    backdrop-filter: blur(10px);
+  }
+  .indice.abierta { display: grid; }
+  .indice header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .indice header h3 { font-family: var(--display); font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 600; }
+  .indice header button { background: none; border: 1px solid rgba(244,239,228,.25); color: var(--crema); border-radius: 999px; padding: .45rem 1rem; cursor: pointer; font-size: .8rem; }
+  .malla { overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .9rem; align-content: start; padding-bottom: 1rem; }
+  .miniatura { border: 1px solid rgba(244,239,228,.14); border-radius: .8rem; overflow: hidden; cursor: pointer; background: rgba(244,239,228,.03); text-align: left; padding: 0; color: inherit; font: inherit; transition: border-color .2s ease, transform .2s ease; }
+  .miniatura:hover { border-color: var(--verde); transform: translateY(-3px); }
+  .miniatura.actual { border-color: var(--dorado); }
+  .miniatura .marco-mini { position: relative; aspect-ratio: 4 / 3; background: linear-gradient(150deg, #14362a, #0a1d16); }
+  .miniatura .mini-letra { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-size: 2.6rem; font-weight: 800; color: rgba(76,195,138,.28); }
+  .miniatura img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; }
+  .miniatura .txt { padding: .6rem .7rem .75rem; }
+  .miniatura b { display: block; font-family: var(--display); font-size: .95rem; font-weight: 600; }
+  .miniatura span { display: block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--verde); margin-top: .2rem; }
+
+  @media (max-width: 900px) {
+    .dos-col, .rejilla-especie { grid-template-columns: 1fr; }
+    .marco-foto, .rejilla-especie .marco-foto, .marco-foto.ancha { aspect-ratio: 16 / 9; max-height: 42vh; }
+    .rejilla-cat { grid-template-columns: 1fr 1fr; }
+    html, body { overflow: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div id="escena" aria-live="polite"></div>
+
+<div class="flechas">
+  <button id="ant" type="button" aria-label="Previous">&#10094;</button>
+</div>
+<div class="flechas">
+  <button id="sig" type="button" aria-label="Next">&#10095;</button>
+</div>
+
+<div class="pie">
+  <span class="marca"><span class="punto"></span> Plantas de Urabá · Urabá, Antioquia</span>
+  <span class="conteo"><b id="cActual">1</b> / <span id="cTotal">1</span></span>
+</div>
+<div class="barra"><i id="avance"></i></div>
+
+<div class="indice" id="indice" role="dialog" aria-label="Exhibition index">
+  <header>
+    <h3>Exhibition Index</h3>
+    <button type="button" id="cerrarIndice">Close &times;</button>
+  </header>
+  <div class="malla" id="malla"></div>
+</div>
+
+<div class="ayuda" id="ayuda" role="dialog" aria-label="Keyboard shortcuts">
+  <div>
+    <h3>How to navigate</h3>
+    <dl>
+      <dt>&#8594; &#8595; Space</dt><dd>Next slide</dd>
+      <dt>&#8592; &#8593; Backspace</dt><dd>Previous slide</dd>
+      <dt>Home / End</dt><dd>First / last slide</dd>
+      <dt>G</dt><dd>Open or close the index</dd>
+      <dt>Tap or swipe</dt><dd>Go forward or back</dd>
+      <dt>?</dt><dd>Show this help</dd>
+    </dl>
+    <p>Photos: Wikimedia Commons. Open research on the flora of Urabá.</p>
+  </div>
+</div>
+
+<script>
+var W = "https://upload.wikimedia.org/wikipedia/commons/";
+
+var CATEGORIAS = [
+  { id: "frutales", nombre: "Fruits and Agribusiness", descripcion: "Agricultural base of the region: fruits, citrus and agribusiness crops." },
+  { id: "maderables", nombre: "Timber, Forestry and Silvopastoral", descripcion: "Valuable timber species, reforestation and shade for livestock." },
+  { id: "tuberculos", nombre: "Tubers, Vegetables and Grains", descripcion: "Staple foods of the household basket and raw materials for agribusiness." },
+  { id: "ornamentales", nombre: "Ornamentals and Tropical Flowers", descripcion: "Exotic foliage and flowers for gardening, interiors and export." },
+  { id: "aromaticas", nombre: "Aromatic, Medicinal and Agroecological", descripcion: "Herbs and plants of high value for gastronomy, health and agroecology." }
+];
+
+var ESPECIES = [
+  { cat: "frutales", nombre: "Banana", cientifico: "Musa × paradisiaca", uso: "Commercial · export",   texto: "Urabá's leading export monocrop and key to the regional economy. From the plantation to the table is a journey of more than two weeks.", img: W + "thumb/0/06/Musa_acuminata_Banan_kar%C5%82owaty_2019-07-12_01.jpg/960px-Musa_acuminata_Banan_kar%C5%82owaty_2019-07-12_01.jpg" },
+  { cat: "frutales", nombre: "Plantain", cientifico: "Musa balbisiana", uso: "Staple food", texto: "Staple food with high national consumption and an international export market.", img: W + "thumb/2/28/Plantain_Tree_IV.jpg/960px-Plantain_Tree_IV.jpg" },
+  { cat: "frutales", nombre: "Passion Fruit", cientifico: "Passiflora edulis", uso: "Fruit · pulps", texto: "High-yield fruit marketed for juices and concentrated pulp processing.", img: W + "thumb/9/9e/Passiflora_Edulis_Closed_Fruit.jpg/960px-Passiflora_Edulis_Closed_Fruit.jpg" },
+  { cat: "frutales", nombre: "Cacao", cientifico: "Theobroma cacao", uso: "Agroindustrial", texto: "Key species in agroforestry systems, in high demand from the chocolate industry.", img: W + "thumb/2/25/Dried_Cacao_Pod_Held_in_Hand.jpg/960px-Dried_Cacao_Pod_Held_in_Hand.jpg" },
+  { cat: "frutales", nombre: "Pineapple", cientifico: "Ananas comosus", uso: "Fruit · fresh market", texto: "Lowland crop well adapted to the area, destined for the fresh market and the processing industry.", img: W + "thumb/9/92/Pi%C3%B1a_%28Ananas_comosus%29%2C_Parque_Nacional_de_Lokobe%2C_Nosy_Be%2C_Madagascar%2C_2025-09-21%2C_DD_39.jpg/960px-Pi%C3%B1a_%28Ananas_comosus%29%2C_Parque_Nacional_de_Lokobe%2C_Nosy_Be%2C_Madagascar%2C_2025-09-21%2C_DD_39.jpg" },
+  { cat: "frutales", nombre: "Papaya", cientifico: "Carica papaya", uso: "Fruit · marketplaces", texto: "Fast-cycle fruit tree, ideal for continuous sales in markets and supermarkets.", img: W + "thumb/3/37/Carica_papaya_14_7_2012.jpg/960px-Carica_papaya_14_7_2012.jpg" },
+  { cat: "frutales", nombre: "Mango", cientifico: "Mangifera indica", uso: "Fresh consumption and industry", texto: "Highly prized tropical fruit, with varieties selected for fresh consumption and industry.", img: W + "thumb/9/92/Apple_mango_and_cross_section_edit1.jpg/960px-Apple_mango_and_cross_section_edit1.jpg" },
+  { cat: "frutales", nombre: "Avocado", cientifico: "Persea americana", uso: "Fruit · agroforestry", texto: "Lowland varieties grown for regional supply and with agroforestry potential.", img: W + "thumb/2/26/Persea_americana_fruits.JPG/960px-Persea_americana_fruits.JPG" },
+  { cat: "frutales", nombre: "Borojo", cientifico: "Borojoa patinoi", uso: "Native fruit · energizing", texto: "Native fruit of the Pacific and Urabá, marketed for its energizing properties.", img: W + "thumb/b/b6/Borojoa_patinoi.jpg/960px-Borojoa_patinoi.jpg" },
+  { cat: "frutales", nombre: "Peach Palm", cientifico: "Bactris gasipaes", uso: "Fruit palm", texto: "Fruit palm in high demand in the local market for its nutritional value.", img: W + "thumb/3/36/Peewah_%28Bactris_gasipaes%29_Fruit_-_Trinidad_and_Tobago.jpg/960px-Peewah_%28Bactris_gasipaes%29_Fruit_-_Trinidad_and_Tobago.jpg" },
+  { cat: "frutales", nombre: "Sweet Granadilla", cientifico: "Passiflora ligularis", uso: "Table fruit", texto: "High-value table fruit in premium national markets.", img: W + "thumb/6/6f/Sweet_granadillas_%28Passiflora_ligularis%29_-_whole_and_cross_section.jpg/960px-Sweet_granadillas_%28Passiflora_ligularis%29_-_whole_and_cross_section.jpg" },
+  { cat: "frutales", nombre: "Guava", cientifico: "Psidium guajava", uso: "Raw material · processed goods", texto: "High-volume raw material for guava candy, jams and processed juices.", img: W + "thumb/e/e5/Psidium_guajava_%28Common_Guava%29_-_Branch_with_Developing_Fruits_and_Foliage.jpg/960px-Psidium_guajava_%28Common_Guava%29_-_Branch_with_Developing_Fruits_and_Foliage.jpg" },
+  { cat: "frutales", nombre: "Oil Palm", cientifico: "Elaeis guineensis", uso: "Agroindustrial", texto: "Large-scale agroindustrial crop for vegetable oil extraction and biodiesel.", img: W + "thumb/e/eb/Elaeis_guineensis_oil_palm_fruit_Portoviejo_Ecuador.jpg/960px-Elaeis_guineensis_oil_palm_fruit_Portoviejo_Ecuador.jpg" },
+
+  { cat: "maderables", nombre: "Teak", cientifico: "Tectona grandis", uso: "Export timber", texto: "Prized timber from commercial reforestation with high export value.", img: W + "thumb/d/d1/Kannimara_Teak_in_Parambikulam_Tiger_Reserve_on_13-01-2011_P1120625.jpg/960px-Kannimara_Teak_in_Parambikulam_Tiger_Reserve_on_13-01-2011_P1120625.jpg" },
+  { cat: "maderables", nombre: "Melina", cientifico: "Gmelina arborea", uso: "Fast-growing timber", texto: "Ultra-fast growing timber for pulp, pallets and particle board.", img: W + "thumb/d/da/Gmelina_Arborea.jpg/960px-Gmelina_Arborea.jpg" },
+  { cat: "maderables", nombre: "Bamboo / Guadua", cientifico: "Guadua angustifolia", uso: "Sustainable construction", texto: "Sustainable material for construction, ecotourism structures and crafts.", img: W + "thumb/2/2d/Guadua_angustifolia_1zz.jpg/960px-Guadua_angustifolia_1zz.jpg" },
+  { cat: "maderables", nombre: "Rain Tree", cientifico: "Albizia saman", uso: "Silvopastoral · shade", texto: "Excellent silvopastoral tree that shades cattle and yields usable timber.", img: W + "thumb/7/7b/Flooded_Albizia_Saman_%28rain_tree%29_in_the_Mekong.jpg/960px-Flooded_Albizia_Saman_%28rain_tree%29_in_the_Mekong.jpg" },
+  { cat: "maderables", nombre: "Pink Poui", cientifico: "Tabebuia rosea", uso: "Timber · landscaping", texto: "Valuable timber and a highly demanded tree for urban and commercial landscaping.", img: W + "thumb/e/e8/Tabebuia_rosea_flower.jpg/960px-Tabebuia_rosea_flower.jpg" },
+  { cat: "maderables", nombre: "Kapok Tree", cientifico: "Ceiba pentandra", uso: "Light timber", texto: "Giant tree with light timber used for plywood and packaging.", img: W + "thumb/2/23/Kapok_on_a_branch_of_Ceiba_pentandra_%28white_silk-cotton_tree%29.jpg/960px-Kapok_on_a_branch_of_Ceiba_pentandra_%28white_silk-cotton_tree%29.jpg" },
+  { cat: "maderables", nombre: "Spanish Cedar", cientifico: "Cedrela odorata", uso: "Fine timber", texto: "Traditional fine timber prized for its pest resistance and quality.", img: W + "thumb/0/04/Cedrela_odorata_trunk.JPG/960px-Cedrela_odorata_trunk.JPG" },
+
+  { cat: "tuberculos", nombre: "Cassava", cientifico: "Manihot esculenta", uso: "Tuber · starch", texto: "Staple tuber of the household basket and raw material for industrial starch.", img: W + "3/37/Manihot_esculenta%2C_the_Cassava_plant_%2817254469394%29.jpg" },
+  { cat: "tuberculos", nombre: "Sweet Potato", cientifico: "Ipomoea batatas", uso: "Sweet tuber", texto: "Sweet tuber on the rise for its nutritional properties and industrial use.", img: W + "thumb/2/22/Ipomoea_batatas_%28Sweet_potato%29_in_China.jpg/960px-Ipomoea_batatas_%28Sweet_potato%29_in_China.jpg" },
+  { cat: "tuberculos", nombre: "Corn", cientifico: "Zea mays", uso: "Staple grain", texto: "Staple grain planted in rotation or intercropped for human and poultry feed.", img: W + "thumb/1/19/Zea_mays_%27arc_en_ciel_inca%27_MHNT.BOT.2015.34.2.jpg/960px-Zea_mays_%27arc_en_ciel_inca%27_MHNT.BOT.2015.34.2.jpg" },
+  { cat: "tuberculos", nombre: "Squash / Pumpkin", cientifico: "Cucurbita moschata", uso: "Vegetable", texto: "Easy-to-manage vegetable widely sold in markets.", img: W + "thumb/7/77/Cucurbita_moschata_Butternut_2012_G2.jpg/960px-Cucurbita_moschata_Butternut_2012_G2.jpg" },
+  { cat: "tuberculos", nombre: "Ginger", cientifico: "Zingiber officinale", uso: "Aromatic rhizome", texto: "Rhizome in great demand for gastronomy and pharmaceuticals.", img: W + "thumb/f/fa/Ginger_Root.jpg/960px-Ginger_Root.jpg" },
+  { cat: "tuberculos", nombre: "Turmeric", cientifico: "Curcuma longa", uso: "Natural colorant", texto: "Processed commercially as a natural colorant and health supplement.", img: W + "thumb/5/5b/Curcuma_longa_roots.jpg/960px-Curcuma_longa_roots.jpg" },
+
+  { cat: "ornamentales", nombre: "Tropical Anthurium", cientifico: "Anthurium andreanum", uso: "Cut flower · indoor", texto: "Indoor plant and cut flower of high commercial value in nurseries.", img: W + "thumb/b/b0/Anthurium_andreanum_2zz.jpg/960px-Anthurium_andreanum_2zz.jpg" },
+  { cat: "ornamentales", nombre: "Hanging Lobster Claw", cientifico: "Heliconia rostrata", uso: "Cut flower · design", texto: "Famous for its hanging inflorescences used in commercial floral design.", img: W + "thumb/a/a0/Heliconia_Rostrata_-_72.jpg/960px-Heliconia_Rostrata_-_72.jpg" },
+  { cat: "ornamentales", nombre: "Monstera / Swiss Cheese Plant", cientifico: "Monstera deliciosa", uso: "Foliage · trend", texto: "Trend-setting plant in landscaping for its large split leaves.", img: W + "thumb/f/fa/Monstera_deliciosa_-_Wilhelma_01.jpg/960px-Monstera_deliciosa_-_Wilhelma_01.jpg" },
+  { cat: "ornamentales", nombre: "Snake Plant", cientifico: "Sansevieria trifasciata", uso: "Indoor · potted", texto: "Ultra-resistant indoor plant in very high commercial demand in pots.", img: W + "thumb/d/da/Sansevieria_trifasciata_Plant_3264px.jpg/960px-Sansevieria_trifasciata_Plant_3264px.jpg" },
+  { cat: "ornamentales", nombre: "Bougainvillea", cientifico: "Bougainvillea spectabilis", uso: "Climbing ornamental", texto: "Climbing shrub marketed for its striking, abundant flowers.", img: W + "thumb/0/0e/Bougainvillea_glabra_20D_8543.jpg/960px-Bougainvillea_glabra_20D_8543.jpg" },
+  { cat: "ornamentales", nombre: "Areca Palm", cientifico: "Dypsis lutescens", uso: "Indoor · privacy screens", texto: "One of the best-selling ornamental plants for interiors and green screens.", img: W + "thumb/7/72/Golden_cane_palm_%28Dypsis_lutescens%29_trunk%2C_Estufa_Fria%2C_Lisbon%2C_Portugal_julesvernex2.jpg/960px-Golden_cane_palm_%28Dypsis_lutescens%29_trunk%2C_Estufa_Fria%2C_Lisbon%2C_Portugal_julesvernex2.jpg" },
+
+  { cat: "aromaticas", nombre: "Lemongrass", cientifico: "Cymbopogon citratus", uso: "Aromatic · infusions", texto: "Aromatic herb sold for herbal infusion and oil extraction.", img: W + "thumb/e/ea/Cymbopogon_citratus_lemongrass_plant_in_garden.jpg/960px-Cymbopogon_citratus_lemongrass_plant_in_garden.jpg" },
+  { cat: "aromaticas", nombre: "Moringa", cientifico: "Moringa oleifera", uso: "Superfood", texto: "Multipurpose tree sold as powder or dried leaves as a superfood.", img: W + "thumb/d/d0/Drumstick_tree_%28Moringa_oleifera%29.jpg/960px-Drumstick_tree_%28Moringa_oleifera%29.jpg" },
+  { cat: "aromaticas", nombre: "Aloe Vera", cientifico: "Aloe vera", uso: "Cosmetics · medicinal", texto: "Raw material in high demand for cosmetics, remedies and cleaning products.", img: W + "thumb/0/07/Aloe_vera_plant_in_flower_pot.jpg/960px-Aloe_vera_plant_in_flower_pot.jpg" },
+  { cat: "aromaticas", nombre: "Rosemary", cientifico: "Salvia rosmarinus", uso: "Gourmet seasoning", texto: "Gourmet seasoning and medicinal plant of high nursery turnover.", img: W + "thumb/0/09/Rosmarinus_officinalis_MHNT.BOT.2008.1.19.jpg/960px-Rosmarinus_officinalis_MHNT.BOT.2008.1.19.jpg" },
+  { cat: "aromaticas", nombre: "Mint", cientifico: "Mentha spicata", uso: "Aromatic · cocktails", texto: "Popular aromatic for cocktails, infusions and pharmaceutical products.", img: W + "thumb/a/ac/00_1984_Gr%C3%BCne_Minze_%28Mentha_Spicata%29_-_Schmetterling_%28Weissling%29.jpg/960px-00_1984_Gr%C3%BCne_Minze_%28Mentha_Spicata%29_-_Schmetterling_%28Weissling%29.jpg" }
+];
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, function (m) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m];
+  });
+}
+
+function cat(id) {
+  for (var i = 0; i < CATEGORIAS.length; i++) if (CATEGORIAS[i].id === id) return CATEGORIAS[i];
+  return { nombre: "", descripcion: "" };
+}
+
+function foto(url, nombre, extra) {
+  var clases = "marco-foto" + (extra ? " " + extra : "");
+  return '<div class="' + clases + '">' +
+    '<img src="' + esc(url) + '" alt="' + esc(nombre) + '" loading="lazy" decoding="async" onerror="this.className=\'fallida\'">' +
+    '<div class="letra" aria-hidden="true">' + esc(nombre.charAt(0)) + '</div>' +
+  '</div>';
+}
+
+var D = [];
+
+D.push({ tipo: "portada" });
+
+D.push({
+  tipo: "seccion",
+  kicker: "Context",
+  titulo: "A border of humid tropics between the sea and the mountain",
+  texto: "Urabá, in the northwest of Antioquia, brings together fewer than 600 kilometers of coastline and forested slopes with abundant rainfall all year long. That mosaic of soils and climates, rather than a single climate, is why more than a hundred different species grow here within a single hectare."
+});
+
+D.push({ tipo: "categorias" });
+
+CATEGORIAS.forEach(function (c) {
+  var n = ESPECIES.filter(function (e) { return e.cat === c.id; }).length;
+  D.push({ tipo: "marcador", cat: c.id, cuenta: n });
+  ESPECIES.filter(function (e) { return e.cat === c.id; }).forEach(function (e) {
+    D.push({ tipo: "especie", especie: e });
+  });
+});
+
+D.push({ tipo: "cierre" });
+
+function htmlFoto(e) {
+  return foto(e.img, e.nombre, "ancha");
+}
+
+function htmlDiapo(d, i) {
+  if (d.tipo === "portada") {
+    return '<section class="diapo portada"><div class="marco">' +
+      '<span class="kicker">Exhibition · flora of Urabá</span>' +
+      '<h1>Plantas de Urabá</h1>' +
+      '<p class="bajada">An open investigation into the species that grow in Urabá, Antioquia — Colombia. Fruit trees, timber, ornamentals and aromatics, photographed and documented one by one.</p>' +
+      '<div class="cifras">' +
+        '<div class="cifra"><b>100</b><span>species</span></div>' +
+        '<div class="cifra"><b>5</b><span>categories</span></div>' +
+        '<div class="cifra"><b>0</b><span>sales · research only</span></div>' +
+      '</div>' +
+    '</div></section>';
+  }
+
+  if (d.tipo === "seccion") {
+    return '<section class="diapo seccion"><div class="marco">' +
+      '<span class="kicker">' + esc(d.kicker) + '</span>' +
+      '<h2 style="margin-top:1.1rem;max-width:22ch">' + esc(d.titulo) + '</h2>' +
+      '<p class="entrada">' + esc(d.texto) + '</p>' +
+    '</div></section>';
+  }
+
+  if (d.tipo === "categorias") {
+    var tarjetas = CATEGORIAS.map(function (c) {
+      var n = ESPECIES.filter(function (e) { return e.cat === c.id; }).length;
+      return '<div class="tarjeta-cat"><b>' + esc(c.nombre) + '</b><span>' + esc(c.descripcion) + '</span><em>' + n + ' species in this exhibition</em></div>';
+    }).join("");
+    return '<section class="diapo seccion"><div class="marco">' +
+      '<span class="kicker">The catalog</span>' +
+      '<h2 style="margin-top:1.1rem">Five groups, a single region</h2>' +
+      '<div class="rejilla-cat">' + tarjetas + '</div>' +
+    '</div></section>';
+  }
+
+  if (d.tipo === "marcador") {
+    var c = cat(d.cat);
+    return '<section class="diapo marcador-cat"><div class="marco">' +
+      '<span class="pildora">' + esc(c.nombre) + '</span>' +
+      '<h2 style="margin:1.4rem 0 1rem;max-width:20ch">' + esc(c.descripcion) + '</h2>' +
+      '<div class="cuenta">' + d.cuenta + '</div>' +
+    '</div></section>';
+  }
+
+  if (d.tipo === "especie") {
+    var e = d.especie;
+    var c2 = cat(e.cat);
+    return '<section class="diapo especie"><div class="marco"><div class="dos-col">' +
+      '<div>' +
+        '<span class="kicker">' + esc(c2.nombre) + '</span>' +
+        '<h2>' + esc(e.nombre) + '</h2>' +
+        '<p class="cientifico" style="font-size:clamp(1.1rem,2.4vw,1.7rem)">' + esc(e.cientifico) + '</p>' +
+        '<div class="uso"><span class="pildora">' + esc(e.uso) + '</span></div>' +
+        '<p class="texto">' + esc(e.texto) + '</p>' +
+      '</div>' +
+      htmlFoto(e) +
+    '</div></div></section>';
+  }
+
+  if (d.tipo === "cierre") {
+    return '<section class="diapo cierre"><div class="marco">' +
+      '<span class="kicker">Follow the research</span>' +
+      '<h2 style="margin-top:1.1rem">Every finding adds a species to the record</h2>' +
+      '<p>We are curious people researching the flora of Urabá. This exhibition is a still frame of living work: 100 documented species and many more to investigate.</p>' +
+      '<div class="contacto">' +
+        '<a href="https://plantas-uraba-lab-sena.netlify.app/">plantas-uraba-lab-sena.netlify.app</a>' +
+        '<a href="mailto:hola@plantasdeuraba.co">hola@plantasdeuraba.co</a>' +
+      '</div>' +
+    '</div></section>';
+  }
+
+  return "";
+}
+
+var escena = document.getElementById("escena");
+D.forEach(function (d, i) {
+  var el = document.createElement("div");
+  el.className = "diapo-wrap";
+  el.innerHTML = htmlDiapo(d, i);
+  var sec = el.firstElementChild;
+  sec.setAttribute("data-i", i);
+  escena.appendChild(sec);
+});
+
+var diapos = Array.prototype.slice.call(escena.querySelectorAll(".diapo"));
+var actual = 0;
+
+function mostrar(n) {
+  n = Math.max(0, Math.min(diapos.length - 1, n));
+  if (n === actual && diapos[n].classList.contains("activa")) return;
+  var previa = diapos[actual];
+  if (previa) {
+    previa.classList.remove("activa", "entra", "salle");
+    void previa.offsetWidth;
+  }
+  actual = n;
+  var nueva = diapos[actual];
+  nueva.classList.add("activa");
+  nueva.classList.remove("entra");
+  void nueva.offsetWidth;
+  nueva.classList.add("entra");
+  document.getElementById("cActual").textContent = String(actual + 1);
+  document.getElementById("cTotal").textContent = String(diapos.length);
+  document.getElementById("avance").style.width = ((actual + 1) / diapos.length * 100) + "%";
+  document.getElementById("ant").disabled = actual === 0;
+  document.getElementById("sig").disabled = actual === diapos.length - 1;
+  Array.prototype.forEach.call(document.querySelectorAll(".miniatura"), function (m) {
+    m.classList.toggle("actual", Number(m.dataset.i) === actual);
+  });
+  if (location.hash !== "#" + (actual + 1)) history.replaceState(null, "", "#" + (actual + 1));
+}
+
+function indice() {
+  return D.reduce(function (acc, d, i) {
+    var etiqueta = "";
+    if (d.tipo === "portada") etiqueta = "Cover";
+    else if (d.tipo === "seccion") etiqueta = d.kicker;
+    else if (d.tipo === "categorias") etiqueta = "Five groups";
+    else if (d.tipo === "marcador") etiqueta = cat(d.cat).nombre;
+    else if (d.tipo === "especie") etiqueta = d.especie.nombre;
+    else etiqueta = "Closing";
+    acc.push({ i: i, etiqueta: etiqueta, img: d.especie ? d.especie.img : "" });
+    return acc;
+  }, []);
+}
+
+var MESA = indice();
+var malla = document.getElementById("malla");
+MESA.forEach(function (m) {
+  var b = document.createElement("button");
+  b.type = "button";
+  b.className = "miniatura";
+  b.dataset.i = m.i;
+  b.innerHTML = '<div class="marco-mini">' +
+      '<span class="mini-letra" aria-hidden="true">' + esc(m.etiqueta.charAt(0)) + '</span>' +
+      (m.img ? '<img src="' + esc(m.img) + '" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">' : "") +
+    '</div><div class="txt"><b>' + esc(m.etiqueta) + '</b><span>' + (m.i + 1) + '</span></div>';
+  b.addEventListener("click", function () {
+    mostrar(Number(b.dataset.i));
+    document.getElementById("indice").classList.remove("abierta");
+  });
+  malla.appendChild(b);
+});
+
+var panelIndice = document.getElementById("indice");
+var panelAyuda = document.getElementById("ayuda");
+
+function alternar(panel) {
+  var abierto = panel.classList.contains("abierta");
+  panelIndice.classList.remove("abierta");
+  panelAyuda.classList.remove("abierta");
+  if (!abierto) panel.classList.add("abierta");
+}
+
+document.getElementById("cerrarIndice").addEventListener("click", function () {
+  panelIndice.classList.remove("abierta");
+});
+
+document.getElementById("sig").addEventListener("click", function () { mostrar(actual + 1); });
+document.getElementById("ant").addEventListener("click", function () { mostrar(actual - 1); });
+
+document.addEventListener("keydown", function (ev) {
+  var k = ev.key;
+  if (k === "Escape") {
+    panelIndice.classList.remove("abierta");
+    panelAyuda.classList.remove("abierta");
+    return;
+  }
+  if (k === "ArrowRight" || k === "ArrowDown" || k === " " || k === "PageDown") { ev.preventDefault(); mostrar(actual + 1); }
+  else if (k === "ArrowLeft" || k === "ArrowUp" || k === "PageUp") { ev.preventDefault(); mostrar(actual - 1); }
+  else if (k === "Home") { ev.preventDefault(); mostrar(0); }
+  else if (k === "End") { ev.preventDefault(); mostrar(diapos.length - 1); }
+  else if (k === "g" || k === "G") { alternar(panelIndice); }
+  else if (k === "?") { alternar(panelAyuda); }
+});
+
+escena.addEventListener("click", function (ev) {
+  if (ev.target.closest("a")) return;
+  mostrar(actual + 1);
+});
+
+var x0 = null;
+escena.addEventListener("touchstart", function (ev) { x0 = ev.changedTouches[0].clientX; }, { passive: true });
+escena.addEventListener("touchend", function (ev) {
+  if (x0 === null) return;
+  var dx = ev.changedTouches[0].clientX - x0;
+  if (Math.abs(dx) > 50) mostrar(actual + (dx < 0 ? 1 : -1));
+  x0 = null;
+}, { passive: true });
+
+var inicial = parseInt((location.hash || "").replace("#", ""), 10);
+mostrar(isFinite(inicial) && inicial > 0 ? inicial - 1 : 0);
+</script>
+</body>
+</html>
